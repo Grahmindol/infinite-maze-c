@@ -3,7 +3,6 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include <stdlib.h>
 
 /*
  * Infinite Maze — Single-header C library
@@ -34,30 +33,40 @@
  *                 Default = 1
  *
  * ------------------------------------------------------------
- * Thread safety: Not thread-safe (shared internal state)
+ * Thread safety:
  *
+ *  - Thread-safe as long as each thread operates on its own
+ *    maze instance (`maze_p`).
+ *
+ *  - Multiple maze instances can safely be created with the
+ *    same seed in different threads and will generate
+ *    identical mazes deterministically.
+ *
+ *  - Accessing the same maze instance from multiple threads
+ *    concurrently is NOT safe.
+ * 
  * ------------------------------------------------------------
  * License:
- * Copyright (c) 2026 Grahmindol
+ *  Copyright (c) 2026 Grahmindol
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ *  The above copyright notice and this permission notice shall be included in
+ *  all copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- * 
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ *
  * Repository: https://github.com/Grahmindol/infinite-maze-c
  */
 
@@ -162,11 +171,36 @@ API bool infinite_maze_is_walkable(int wx, int wy, void* maze_p);
  */
 API uint8_t infinite_maze_get_cell(int wx, int wy, void* maze_p);
 
+/**
+ * @brief Compute the hierarchical center of a dead-end region.
+ *
+ * Computes the center coordinates of the dead-end region containing
+ * the given world cell at a specified hierarchical level.
+ * Higher levels correspond to larger structural groupings in the maze.
+ *
+ * The function is deterministic and symmetric for positive and
+ * negative coordinates.
+ *
+ * @param wx World X coordinate of the cell.
+ * @param wy World Y coordinate of the cell.
+ * @param level Dead-end hierarchy level (0 = cell itself).
+ * @param cx Output pointer receiving the center X coordinate.
+ * @param cy Output pointer receiving the center Y coordinate.
+ *
+ * @note Complexity: O(level)
+ *
+ * @note For level = 0, the returned center is (wx, wy).
+ */
+API void infinite_maze_get_dead_end_center(int wx, int wy, int level, int* cx,
+                                           int* cy);
+
 /* =======================
    === IMPLEMENTATION ====
    ======================= */
 
 #ifdef INFINITE_MAZE_IMPLEMENTATION
+
+#include <stdlib.h>
 
 typedef enum {
   DIR_N = 0,
@@ -187,7 +221,7 @@ typedef struct node_t {
 } node_t;
 
 typedef struct maze_t {
-  int seed;
+  uint64_t seed;
   node_t* data;
   node_t* outer_node;
 } maze_t;
@@ -197,6 +231,13 @@ static const int DIR_DY[DIR_COUNT] = {1, 0, 0, -1};
 static const direction_t DIR_OPP[DIR_COUNT] = {DIR_S, DIR_E, DIR_W, DIR_N};
 
 /** Internal helpers */
+
+static inline uint64_t rng(uint64_t* s) {
+  uint64_t z = (*s += 0x9E3779B97F4A7C15ULL);
+  z = (z ^ (z >> 30)) * 0xBF58476D1CE4E5B9ULL;
+  z = (z ^ (z >> 27)) * 0x94D049BB133111EBULL;
+  return z ^ (z >> 31);
+}
 
 static inline node_t* _node(maze_t* m, int x, int y) {
   if (!m) return NULL;
@@ -221,7 +262,8 @@ static void _explore(maze_t* m, int x, int y) {
   if (!c || c->outer_maze != NULL) return;
   c->outer_maze = m;
 
-  direction_t start = rand() % DIR_COUNT;
+  rng(&m->seed);
+  direction_t start = m->seed % DIR_COUNT;
   for (int i = 0; i < DIR_COUNT; i++) {
     direction_t d = (start + i) % DIR_COUNT;
     int nx = x + DIR_DX[d];
@@ -308,10 +350,10 @@ static inline node_t* _get_refined_cell(int wx, int wy, maze_t* root) {
 
   if ((abs(lx) != MAZE_RADIUS && abs(ly) != MAZE_RADIUS)) return base_node;
 
-  srand(base_node->outer_maze->seed ^ (lx) * 0x9E3779B185EBCA87ULL ^
+  uint64_t s = (base_node->outer_maze->seed ^ (lx) * 0x9E3779B185EBCA87ULL ^
         (ly) * 0xC2B2AE3D27D4EB4FULL);
 
-  if (lx == -MAZE_RADIUS && ly != 0 && rand() & 0b10) {
+  if (lx == -MAZE_RADIUS && ly != 0 && rng(&s) & 0b11) {
     base_node->is_open[DIR_W] = 1;
     _get_raw_cell(wx - 1, wy, root)->is_open[DIR_E] = 1;
 
@@ -321,7 +363,7 @@ static inline node_t* _get_refined_cell(int wx, int wy, maze_t* root) {
         ->is_open[DIR_OPP[base_node->parent_direction]] = 0;
 
     base_node->parent_direction = DIR_W;
-  } else if (ly == MAZE_RADIUS && lx != 0 && rand() & 1) {
+  } else if (ly == MAZE_RADIUS && lx != 0 && rng(&s) & 0b11) {
     base_node->is_open[DIR_N] = 1;
     _get_raw_cell(wx, wy + 1, root)->is_open[DIR_S] = 1;
 
@@ -342,7 +384,6 @@ API void* infinite_maze_new(int seed) {
   maze_t* m = calloc(1, sizeof(*m));
   m->seed = seed;
   m->data = calloc(size * size, sizeof(node_t));
-  srand(m->seed);
   _node(m, 0, 0)->parent_direction = -1;
   _explore(m, 0, 0);
   return (void*)m;
@@ -395,26 +436,64 @@ API uint8_t infinite_maze_get_cell(int wx, int wy, void* maze_p) {
   maze_t* root = maze_p;
 
   const int size = 2 * MAZE_RADIUS + 1;
-  int x = wx >> 1, y = wy >> 1;
 
-  uint8_t res = infinite_maze_is_walkable(wx, wy, maze_p);
+  int x = wx >> 1, y = wy >> 1;
   node_t* n = _get_raw_cell(x, y, root);
 
+  uint8_t res = infinite_maze_is_walkable(wx, wy, maze_p);
   if ((wx ^ wy) & 1 && wx & 1) {
     res |= _is_dead_end(n) << 1;
   }
 
+  bool on_y_border = wy & 1;
+  bool on_x_border = ~wx & 1;
   for (int i = 2; i < 8; i++) {
     if (!root->outer_node) _get_raw_cell(x, y + (2 * MAZE_RADIUS + 1), root);
     root = root->outer_node->outer_maze;
 
-    int sx = (x > 0) - (x < 0), sy = (y > 0) - (y < 0);
-    x = (x + sx * MAZE_RADIUS) / size;
-    y = (y + sy * MAZE_RADIUS) / size;
-    node_t* parent = _get_raw_cell(x, y, root);
-    res |= _is_dead_end(parent) << i;
+    const int sx = (x > 0) - (x < 0), sy = (y > 0) - (y < 0);
+    const int cx = (x + sx * MAZE_RADIUS) / size;
+    const int cy = (y + sy * MAZE_RADIUS) / size;
+
+    on_y_border &= (cy * size + MAZE_RADIUS) == y;
+    on_x_border &= (cx * size - MAZE_RADIUS) == x;
+    x = cx;
+    y = cy;
+
+    if (!(on_x_border || on_y_border)) {
+      node_t* parent = _get_raw_cell(cx, cy, root);
+      res |= _is_dead_end(parent) << i;
+    }
   }
   return res;
+}
+
+API void infinite_maze_get_dead_end_center(int wx, int wy, int level, int* cx, int* cy) {
+  *cx = wx;
+  *cy = wy;
+
+  if (level <= 0) return;
+
+  const int size = 2 * MAZE_RADIUS + 1;
+
+  *cx >>= 1;
+  *cy >>= 1;
+
+  for (int i = 1; i < level; ++i) {
+    int sx = (*cx > 0) - (*cx < 0);
+    int sy = (*cy > 0) - (*cy < 0);
+
+    *cx = (*cx + sx * MAZE_RADIUS) / size;
+    *cy = (*cy + sy * MAZE_RADIUS) / size;
+  }
+
+  for (int i = 1; i < level; ++i) {
+    *cx *= size;
+    *cy *= size;
+  }
+
+  *cx = (*cx << 1) + 1;
+  *cy = (*cy << 1);
 }
 
 #endif /* INFINITE_MAZE_IMPLEMENTATION */
