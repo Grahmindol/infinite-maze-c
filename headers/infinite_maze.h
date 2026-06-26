@@ -44,16 +44,16 @@
  *
  *  - Accessing the same maze instance from multiple threads
  *    concurrently is NOT safe.
- * 
+ *
  * ------------------------------------------------------------
  * License:
  *  Copyright (c) 2026 Grahmindol
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
- *  of this software and associated documentation files (the "Software"), to deal
- *  in the Software without restriction, including without limitation the rights
- *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- *  copies of the Software, and to permit persons to whom the Software is
+ *  of this software and associated documentation files (the "Software"), to
+ *  deal in the Software without restriction, including without limitation the
+ *  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+ *  sell copies of the Software, and to permit persons to whom the Software is
  *  furnished to do so, subject to the following conditions:
  *
  *  The above copyright notice and this permission notice shall be included in
@@ -63,9 +63,9 @@
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- *  SOFTWARE.
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ *  IN THE SOFTWARE.
  *
  * Repository: https://github.com/Grahmindol/infinite-maze-c
  */
@@ -172,27 +172,56 @@ API bool infinite_maze_is_walkable(int wx, int wy, void* maze_p);
 API uint8_t infinite_maze_get_cell(int wx, int wy, void* maze_p);
 
 /**
- * @brief Compute the hierarchical center of a dead-end region.
+ * @brief Retrieve hierarchical dead-end information for a world cell.
  *
- * Computes the center coordinates of the dead-end region containing
+ * Encodes walkability and hierarchical fixedness of the cell located
+ * at world coordinates (`wx`, `wy`).
+ *
+ * A cell is considered *fixed* if it lies on the path connecting regions
+ * at the corresponding hierarchy level. Consequently, the more bits that
+ * are set, the more globally important the cell is: highly fixed cells are
+ * shared by increasingly large-scale paths through the maze.
+ *
+ * A bit set to `1` indicates that the corresponding cell (or its ancestor
+ * at that hierarchy level) is fixed.
+ *
+ * @param wx World-space X coordinate.
+ * @param wy World-space Y coordinate.
+ * @param maze_p Pointer to the root maze instance.
+ *
+ * @return uint8_t
+ * - Encoded walkability and hierarchy information.
+ * - Returns `0` if `maze_p` is NULL.
+ *
+ * @note Time complexity: O(log(wx² + wy²))
+ *
+ * @warning This function may trigger lazy generation of parent maze chunks.
+ *
+ * @see infinite_maze_is_walkable
+ * @see infinite_maze_get_cell
+ */
+API uint8_t infinite_maze_get_fixedness(int wx, int wy, void* maze_p);
+
+/**
+ * @brief Compute the hierarchical center of a region.
+ *
+ * Computes the center coordinates of the region containing
  * the given world cell at a specified hierarchical level.
  * Higher levels correspond to larger structural groupings in the maze.
- *
- * The function is deterministic and symmetric for positive and
- * negative coordinates.
  *
  * @param wx World X coordinate of the cell.
  * @param wy World Y coordinate of the cell.
  * @param level Dead-end hierarchy level (0 = cell itself).
  * @param cx Output pointer receiving the center X coordinate.
  * @param cy Output pointer receiving the center Y coordinate.
+ * @param maze_p Pointer to the root maze instance.
  *
  * @note Complexity: O(level)
  *
  * @note For level = 0, the returned center is (wx, wy).
+ * @note For level = 1, the returned center is (wx | 1, wy &~1).
  */
-API void infinite_maze_get_dead_end_center(int wx, int wy, int level, int* cx,
-                                           int* cy);
+API void infinite_maze_get_region_center(int wx, int wy, int level, int* cx, int* cy, void* maze_p);
 
 /* =======================
    === IMPLEMENTATION ====
@@ -202,13 +231,7 @@ API void infinite_maze_get_dead_end_center(int wx, int wy, int level, int* cx,
 
 #include <stdlib.h>
 
-typedef enum {
-  DIR_N = 0,
-  DIR_W = 1,
-  DIR_E = 2,
-  DIR_S = 3,
-  DIR_COUNT
-} direction_t;
+typedef enum { DIR_N = 0, DIR_W = 1, DIR_E = 2, DIR_S = 3, DIR_COUNT } direction_t;
 
 struct maze_t;
 
@@ -276,8 +299,7 @@ static void _explore(maze_t* m, int x, int y) {
   }
 }
 
-static inline void _world_to_chunk(const int wx, const int wy, int* cx, int* cy,
-                                   int* lx, int* ly) {
+static inline void _world_to_chunk(const int wx, const int wy, int* cx, int* cy, int* lx, int* ly) {
   const int size = 2 * MAZE_RADIUS + 1;
   const int sx = (wx > 0) - (wx < 0);
   const int sy = (wy > 0) - (wy < 0);
@@ -305,8 +327,7 @@ static void _update_chunk_aperture(maze_t* m) {
     int dx = MAZE_RADIUS * DIR_DX[d];
     int dy = MAZE_RADIUS * DIR_DY[d];
     node_t* n = _node(m, dx, dy);
-    if ((n->is_open[d] = m->outer_node->is_open[d]))
-      _fix_parent_path(m, dx, dy);
+    if ((n->is_open[d] = m->outer_node->is_open[d])) _fix_parent_path(m, dx, dy);
 
     if (n->inner_maze) _update_chunk_aperture(n->inner_maze);
   }
@@ -314,8 +335,7 @@ static void _update_chunk_aperture(maze_t* m) {
 
 /** Get cell in world coordinates with chunk generation */
 static node_t* _get_raw_cell(int wx, int wy, maze_t* root) {
-  if (abs(wx) <= MAZE_RADIUS && abs(wy) <= MAZE_RADIUS)
-    return _node(root, wx, wy);
+  if (abs(wx) <= MAZE_RADIUS && abs(wy) <= MAZE_RADIUS) return _node(root, wx, wy);
 
   int cx, cy, lx, ly;
   _world_to_chunk(wx, wy, &cx, &cy, &lx, &ly);
@@ -331,9 +351,9 @@ static node_t* _get_raw_cell(int wx, int wy, maze_t* root) {
   node_t* outer_node = _get_raw_cell(cx, cy, outer_maze);
 
   if (!outer_node->inner_maze) {
-    outer_node->inner_maze = (maze_t*)infinite_maze_new(
-        outer_maze->seed ^ (long long)(cx) * 0x9E3779B185EBCA87ULL ^
-        (long long)(cy) * 0xC2B2AE3D27D4EB4FULL);
+    outer_node->inner_maze =
+        (maze_t*)infinite_maze_new(outer_maze->seed ^ (long long)(cx) * 0x9E3779B185EBCA87ULL ^
+                                   (long long)(cy) * 0xC2B2AE3D27D4EB4FULL);
     outer_node->inner_maze->outer_node = outer_node;
     _update_chunk_aperture(outer_node->inner_maze);
   }
@@ -350,8 +370,8 @@ static inline node_t* _get_refined_cell(int wx, int wy, maze_t* root) {
 
   if ((abs(lx) != MAZE_RADIUS && abs(ly) != MAZE_RADIUS)) return base_node;
 
-  uint64_t s = (base_node->outer_maze->seed ^ (lx) * 0x9E3779B185EBCA87ULL ^
-        (ly) * 0xC2B2AE3D27D4EB4FULL);
+  uint64_t s =
+      (base_node->outer_maze->seed ^ (lx) * 0x9E3779B185EBCA87ULL ^ (ly) * 0xC2B2AE3D27D4EB4FULL);
 
   if (lx == -MAZE_RADIUS && ly != 0 && rng(&s) & 0b11) {
     base_node->is_open[DIR_W] = 1;
@@ -427,48 +447,8 @@ API bool infinite_maze_is_walkable(int wx, int wy, void* maze_p) {
   return _get_refined_cell(x, y, root)->is_open[!(wx & 1)];
 }
 
-static inline bool _is_dead_end(node_t* n) {
-  return (n->is_open[0] + n->is_open[1] + n->is_open[2] + n->is_open[3]) == 1;
-}
-
-API uint8_t infinite_maze_get_cell(int wx, int wy, void* maze_p) {
-  if (!maze_p) return 0;
-  maze_t* root = maze_p;
-
-  const int size = 2 * MAZE_RADIUS + 1;
-
-  int x = wx >> 1, y = wy >> 1;
-  node_t* n = _get_raw_cell(x, y, root);
-
-  uint8_t res = infinite_maze_is_walkable(wx, wy, maze_p);
-  if ((wx ^ wy) & 1 && wx & 1) {
-    res |= _is_dead_end(n) << 1;
-  }
-
-  bool on_y_border = wy & 1;
-  bool on_x_border = ~wx & 1;
-  for (int i = 2; i < 8; i++) {
-    if (!root->outer_node) _get_raw_cell(x, y + (2 * MAZE_RADIUS + 1), root);
-    root = root->outer_node->outer_maze;
-
-    const int sx = (x > 0) - (x < 0), sy = (y > 0) - (y < 0);
-    const int cx = (x + sx * MAZE_RADIUS) / size;
-    const int cy = (y + sy * MAZE_RADIUS) / size;
-
-    on_y_border &= (cy * size + MAZE_RADIUS) == y;
-    on_x_border &= (cx * size - MAZE_RADIUS) == x;
-    x = cx;
-    y = cy;
-
-    if (!(on_x_border || on_y_border)) {
-      node_t* parent = _get_raw_cell(cx, cy, root);
-      res |= _is_dead_end(parent) << i;
-    }
-  }
-  return res;
-}
-
-API void infinite_maze_get_dead_end_center(int wx, int wy, int level, int* cx, int* cy) {
+API void infinite_maze_get_region_center(int wx, int wy, int level, int* cx, int* cy,
+                                         void* maze_p) {
   *cx = wx;
   *cy = wy;
 
@@ -478,6 +458,20 @@ API void infinite_maze_get_dead_end_center(int wx, int wy, int level, int* cx, i
 
   *cx >>= 1;
   *cy >>= 1;
+
+  if (level <= 1) {
+    *cx = (*cx << 1) + 1;
+    *cy = (*cy << 1);
+    return;
+  }
+
+  while (1) {
+    node_t* cell = _get_refined_cell(*cx, *cy, (maze_t*)maze_p);
+    if (cell->parent_direction < 0 || cell->parent_direction >= DIR_COUNT) break;
+
+    *cx += DIR_DX[cell->parent_direction];
+    *cy += DIR_DY[cell->parent_direction];
+  }
 
   for (int i = 1; i < level; ++i) {
     int sx = (*cx > 0) - (*cx < 0);
@@ -494,6 +488,100 @@ API void infinite_maze_get_dead_end_center(int wx, int wy, int level, int* cx, i
 
   *cx = (*cx << 1) + 1;
   *cy = (*cy << 1);
+}
+
+typedef uint8_t (*node_predicate_t)(const node_t*);
+
+static uint8_t _get_cell_impl(int wx, int wy, void* maze_p, node_predicate_t predicate) {
+  if (!maze_p) return 0;
+  maze_t* root = maze_p;
+  const int size = 2 * MAZE_RADIUS + 1;
+
+  node_t* n = _get_raw_cell(wx >> 1, wy >> 1, root);
+  uint8_t res = infinite_maze_is_walkable(wx, wy, maze_p);
+  if (wy & 1 || ~wx & 1) {
+    int xa, ya, xb, yb;
+    if (wy & 1) {
+      uint8_t neib = _get_cell_impl(wx, wy - 1, maze_p, predicate);
+      for (int i = 2; i < 8; i++) {
+        infinite_maze_get_region_center(wx, wy + 1, i, &xa, &ya, maze_p);
+        infinite_maze_get_region_center(wx, wy - 1, i, &xb, &yb, maze_p);
+
+        if (xa == xb && ya == yb) {
+          res |= neib & (1 << i);
+        } else {
+          res &= ~(1 << i);
+        }
+      }
+    }
+    if (~wx & 1) {
+      uint8_t neib = _get_cell_impl(wx + 1, wy, maze_p, predicate);
+      for (int i = 2; i < 8; i++) {
+        infinite_maze_get_region_center(wx + 1, wy, i, &xa, &ya, maze_p);
+        infinite_maze_get_region_center(wx - 1, wy, i, &xb, &yb, maze_p);
+
+        if (xa == xb && ya == yb) {
+          res |= neib & (1 << i);
+        } else {
+          res &= ~(1 << i);
+        }
+      }
+    }
+    if (~wx & 1 && wy & 1) {
+      uint8_t neib = _get_cell_impl(wx + 1, wy - 1, maze_p, predicate);
+      for (int i = 2; i < 8; i++) {
+        infinite_maze_get_region_center(wx + 1, wy - 1, i, &xa, &ya, maze_p);
+        infinite_maze_get_region_center(wx - 1, wy + 1, i, &xb, &yb, maze_p);
+
+        if (xa == xb && ya == yb) {
+          infinite_maze_get_region_center(wx - 1, wy - 1, i, &xa, &ya, maze_p);
+          infinite_maze_get_region_center(wx + 1, wy + 1, i, &xb, &yb, maze_p);
+          if (xa == xb && ya == yb) {
+            res |= neib & (1 << i);
+          } else {
+            res &= ~(1 << i);
+          }
+        } else {
+          res &= ~(1 << i);
+        }
+      }
+    }
+    return res;
+  }
+
+  res |= predicate(n) << 1;
+  infinite_maze_get_region_center(wx, wy, 2, &wx, &wy, maze_p);
+  int x = wx >> 1, y = wy >> 1;
+
+  for (int i = 2; i < 8; i++) {
+    if (!root->outer_node) _get_raw_cell(x, y + (2 * MAZE_RADIUS + 1), root);
+    root = root->outer_node->outer_maze;
+
+    const int sx = (x > 0) - (x < 0), sy = (y > 0) - (y < 0);
+    const int cx = (x + sx * MAZE_RADIUS) / size;
+    const int cy = (y + sy * MAZE_RADIUS) / size;
+
+    x = cx;
+    y = cy;
+
+    node_t* parent = _get_raw_cell(cx, cy, root);
+    res |= predicate(parent) << i;
+  }
+  return res;
+}
+
+static unsigned char _is_dead_end(const node_t* n) {
+  return (n->is_open[0] + n->is_open[1] + n->is_open[2] + n->is_open[3]) == 1;
+}
+
+API uint8_t infinite_maze_get_cell(int wx, int wy, void* maze_p) {
+  return _get_cell_impl(wx, wy, maze_p, _is_dead_end);
+}
+
+static unsigned char _is_fixed(const node_t* n) { return !!n->is_fixed; }
+
+API uint8_t infinite_maze_get_fixedness(int wx, int wy, void* maze_p) {
+  return _get_cell_impl(wx, wy, maze_p, _is_fixed);
 }
 
 #endif /* INFINITE_MAZE_IMPLEMENTATION */
