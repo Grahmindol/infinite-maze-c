@@ -44,12 +44,12 @@ Contributions and optimization suggestions are **welcome** 🙌
 ## Demo :
   Try the interactive WebAssembly version:
 
-- [Browser Demo](demo/index.html)
+- [Browser Demo](https://grahmindol.github.io/infinite-maze-c/html/demo/index.html)
 
 ## Usage 🔧
 
 ### Doxygen page :
-  (here)[https://grahmindol.github.io/infinite-maze-c/html/infinite__maze_8h.html]
+  [here](https://grahmindol.github.io/infinite-maze-c/html/infinite__maze_8h.html)
 
 ### 📚 API
 
