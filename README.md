@@ -20,7 +20,6 @@ for **any two points** in the maze, there exists **one and only one path** conne
 
 This guarantees **no loops**, **no ambiguity**, and deterministic navigation throughout the maze.
 
----
 
 ## Proof of Concept ⚠️
 
@@ -41,9 +40,16 @@ Performance, memory usage, and edge cases have **not** been the main focus so fa
 
 Contributions and optimization suggestions are **welcome** 🙌
 
----
+
+## Demo :
+  Try the interactive WebAssembly version:
+
+- [Browser Demo](demo/index.html)
 
 ## Usage 🔧
+
+### Doxygen page :
+  (here)[https://grahmindol.github.io/infinite-maze-c/html/infinite__maze_8h.html]
 
 ### 📚 API
 
@@ -216,9 +222,3 @@ int main(void) {
   return 0;
 }
 ```
-
-## Demo
-
-Try the interactive WebAssembly version:
-
-- [Browser Demo](demo/index.html)
