@@ -1,0 +1,293 @@
+\doxysection{infinite\+\_\+maze.\+h File Reference}
+\hypertarget{infinite__maze_8h}{}\label{infinite__maze_8h}\index{infinite\_maze.h@{infinite\_maze.h}}
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+Include dependency graph for infinite\+\_\+maze.\+h:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{infinite__maze_8h__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\+\_\+\+RADIUS}}~1
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+API void \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{infinite__maze_8h_a48ea5e5d695df756191458a93c543137}{infinite\+\_\+maze\+\_\+new}} (int seed)
+\begin{DoxyCompactList}\small\item\em Create a new infinite procedurally generated maze. \end{DoxyCompactList}\item 
+API void \doxymbox{\hyperlink{infinite__maze_8h_a6cf669e5737ee641aaa20bcedc022322}{infinite\+\_\+maze\+\_\+free}} (void \texorpdfstring{$\ast$}{*}m)
+\begin{DoxyCompactList}\small\item\em Free an infinite maze and all generated chunks. \end{DoxyCompactList}\item 
+API bool \doxymbox{\hyperlink{infinite__maze_8h_a491c6a9998c9ce64d88b3a3a8a5c843d}{infinite\+\_\+maze\+\_\+is\+\_\+walkable}} (void \texorpdfstring{$\ast$}{*}maze\+\_\+p, int wx, int wy)
+\begin{DoxyCompactList}\small\item\em Test whether a world-\/space cell is walkable. \end{DoxyCompactList}\item 
+API uint8\+\_\+t \doxymbox{\hyperlink{infinite__maze_8h_ac8b9f96bc4fcca3f0428dd31d5839b49}{infinite\+\_\+maze\+\_\+get\+\_\+cell}} (void \texorpdfstring{$\ast$}{*}maze\+\_\+p, int wx, int wy)
+\begin{DoxyCompactList}\small\item\em Retrieve hierarchical dead-\/end information for a world cell. \end{DoxyCompactList}\item 
+API uint8\+\_\+t \doxymbox{\hyperlink{infinite__maze_8h_a2286ca1218ab4743745f80c48e04d1b8}{infinite\+\_\+maze\+\_\+get\+\_\+fixedness}} (void \texorpdfstring{$\ast$}{*}maze\+\_\+p, int wx, int wy)
+\begin{DoxyCompactList}\small\item\em Retrieve hierarchical dead-\/end information for a world cell. \end{DoxyCompactList}\item 
+API void \doxymbox{\hyperlink{infinite__maze_8h_a10f439f3c521c35020e0420756c6c7fd}{infinite\+\_\+maze\+\_\+get\+\_\+region\+\_\+center}} (void \texorpdfstring{$\ast$}{*}maze\+\_\+p, int wx, int wy, int level, int \texorpdfstring{$\ast$}{*}cx, int \texorpdfstring{$\ast$}{*}cy)
+\begin{DoxyCompactList}\small\item\em Compute the hierarchical center of a region. \end{DoxyCompactList}\item 
+API void \doxymbox{\hyperlink{infinite__maze_8h_a55a7e853e09ab9461ae727fa64e567df}{infinite\+\_\+maze\+\_\+walk\+\_\+from\+\_\+to}} (void \texorpdfstring{$\ast$}{*}maze\+\_\+p, int fwx, int fwy, int twx, int twy, void(\texorpdfstring{$\ast$}{*}walker)(int x, int y, void \texorpdfstring{$\ast$}{*}user\+\_\+data), void \texorpdfstring{$\ast$}{*}user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Stream the unique shortest path between two world coordinates. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{infinite__maze_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}\index{infinite\_maze.h@{infinite\_maze.h}!MAZE\_RADIUS@{MAZE\_RADIUS}}
+\index{MAZE\_RADIUS@{MAZE\_RADIUS}!infinite\_maze.h@{infinite\_maze.h}}
+\doxysubsubsection{\texorpdfstring{MAZE\_RADIUS}{MAZE\_RADIUS}}
+{\footnotesize\ttfamily \label{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71} 
+\+\#define MAZE\+\_\+\+RADIUS~1}
+
+
+
+\label{doc-func-members}
+\Hypertarget{infinite__maze_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{infinite__maze_8h_a6cf669e5737ee641aaa20bcedc022322}\index{infinite\_maze.h@{infinite\_maze.h}!infinite\_maze\_free@{infinite\_maze\_free}}
+\index{infinite\_maze\_free@{infinite\_maze\_free}!infinite\_maze.h@{infinite\_maze.h}}
+\doxysubsubsection{\texorpdfstring{infinite\_maze\_free()}{infinite\_maze\_free()}}
+{\footnotesize\ttfamily \label{infinite__maze_8h_a6cf669e5737ee641aaa20bcedc022322} 
+API void infinite\+\_\+maze\+\_\+free (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{m}{}\end{DoxyParamCaption})}
+
+
+
+Free an infinite maze and all generated chunks. 
+
+Recursively frees all chunks that have been generated so far, including inner and outer mazes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & Maze instance returned by \doxylink{infinite__maze_8h_a48ea5e5d695df756191458a93c543137}{infinite\+\_\+maze\+\_\+new()}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Complexity:\+ O(log(r))
+\end{DoxyNote}
+where r is distance to orgine to the farthest point generated
+
+\begin{DoxyWarning}{Warning}
+All pointers obtained from this maze become invalid. 
+\end{DoxyWarning}
+\Hypertarget{infinite__maze_8h_ac8b9f96bc4fcca3f0428dd31d5839b49}\index{infinite\_maze.h@{infinite\_maze.h}!infinite\_maze\_get\_cell@{infinite\_maze\_get\_cell}}
+\index{infinite\_maze\_get\_cell@{infinite\_maze\_get\_cell}!infinite\_maze.h@{infinite\_maze.h}}
+\doxysubsubsection{\texorpdfstring{infinite\_maze\_get\_cell()}{infinite\_maze\_get\_cell()}}
+{\footnotesize\ttfamily \label{infinite__maze_8h_ac8b9f96bc4fcca3f0428dd31d5839b49} 
+API uint8\+\_\+t infinite\+\_\+maze\+\_\+get\+\_\+cell (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{maze\+\_\+p}{, }\item[{int}]{wx}{, }\item[{int}]{wy}{}\end{DoxyParamCaption})}
+
+
+
+Retrieve hierarchical dead-\/end information for a world cell. 
+
+Encodes walkability and hierarchical dead-\/end levels of the cell located at world coordinates ({\ttfamily wx}, {\ttfamily wy}). Each bit in the returned byte represents a dead-\/end status at a given hierarchy depth of the infinite maze.\hypertarget{infinite__maze_8h_autotoc_md0}{}\doxysubsubsubsection{\texorpdfstring{Bit layout of the returned byte}{Bit layout of the returned byte}}\label{infinite__maze_8h_autotoc_md0}
+
+\begin{DoxyItemize}
+\item Bit 0 :\+ Cell walkability (1 = walkable, 0 = wall)
+\item Bit 1 :\+ Dead-\/end status at local chunk level
+\item Bits 2–7 :\+ Dead-\/end status propagated through parent maze levels
+\end{DoxyItemize}
+
+A bit set to {\ttfamily 1} indicates that the corresponding cell (or its ancestor at that hierarchy level) is a dead-\/end.
+
+
+\begin{DoxyParams}{Parameters}
+{\em wx} & World-\/space X coordinate. \\
+\hline
+{\em wy} & World-\/space Y coordinate. \\
+\hline
+{\em maze\+\_\+p} & Pointer to the root maze instance.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t
+\begin{DoxyItemize}
+\item Encoded walkability and dead-\/end hierarchy information.
+\item Returns {\ttfamily 0} if {\ttfamily maze\+\_\+p} is NULL.
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Time complexity:\+ O(log(wx² + wy²))
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+This function may trigger lazy generation of parent maze chunks.
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\doxylink{infinite__maze_8h_a491c6a9998c9ce64d88b3a3a8a5c843d}{infinite\+\_\+maze\+\_\+is\+\_\+walkable} 
+\end{DoxySeeAlso}
+\Hypertarget{infinite__maze_8h_a2286ca1218ab4743745f80c48e04d1b8}\index{infinite\_maze.h@{infinite\_maze.h}!infinite\_maze\_get\_fixedness@{infinite\_maze\_get\_fixedness}}
+\index{infinite\_maze\_get\_fixedness@{infinite\_maze\_get\_fixedness}!infinite\_maze.h@{infinite\_maze.h}}
+\doxysubsubsection{\texorpdfstring{infinite\_maze\_get\_fixedness()}{infinite\_maze\_get\_fixedness()}}
+{\footnotesize\ttfamily \label{infinite__maze_8h_a2286ca1218ab4743745f80c48e04d1b8} 
+API uint8\+\_\+t infinite\+\_\+maze\+\_\+get\+\_\+fixedness (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{maze\+\_\+p}{, }\item[{int}]{wx}{, }\item[{int}]{wy}{}\end{DoxyParamCaption})}
+
+
+
+Retrieve hierarchical dead-\/end information for a world cell. 
+
+Encodes walkability and hierarchical fixedness of the cell located at world coordinates ({\ttfamily wx}, {\ttfamily wy}).
+
+A cell is considered {\itshape fixed} if it lies on the path connecting regions at the corresponding hierarchy level. Consequently, the more bits that are set, the more globally important the cell is:\+ highly fixed cells are shared by increasingly large-\/scale paths through the maze.
+
+A bit set to {\ttfamily 1} indicates that the corresponding cell (or its ancestor at that hierarchy level) is fixed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em wx} & World-\/space X coordinate. \\
+\hline
+{\em wy} & World-\/space Y coordinate. \\
+\hline
+{\em maze\+\_\+p} & Pointer to the root maze instance.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t
+\begin{DoxyItemize}
+\item Encoded walkability and hierarchy information.
+\item Returns {\ttfamily 0} if {\ttfamily maze\+\_\+p} is NULL.
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Time complexity:\+ O(log(wx² + wy²))
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+This function may trigger lazy generation of parent maze chunks.
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\doxylink{infinite__maze_8h_a491c6a9998c9ce64d88b3a3a8a5c843d}{infinite\+\_\+maze\+\_\+is\+\_\+walkable} 
+
+\doxylink{infinite__maze_8h_ac8b9f96bc4fcca3f0428dd31d5839b49}{infinite\+\_\+maze\+\_\+get\+\_\+cell} 
+\end{DoxySeeAlso}
+\Hypertarget{infinite__maze_8h_a10f439f3c521c35020e0420756c6c7fd}\index{infinite\_maze.h@{infinite\_maze.h}!infinite\_maze\_get\_region\_center@{infinite\_maze\_get\_region\_center}}
+\index{infinite\_maze\_get\_region\_center@{infinite\_maze\_get\_region\_center}!infinite\_maze.h@{infinite\_maze.h}}
+\doxysubsubsection{\texorpdfstring{infinite\_maze\_get\_region\_center()}{infinite\_maze\_get\_region\_center()}}
+{\footnotesize\ttfamily \label{infinite__maze_8h_a10f439f3c521c35020e0420756c6c7fd} 
+API void infinite\+\_\+maze\+\_\+get\+\_\+region\+\_\+center (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{maze\+\_\+p}{, }\item[{int}]{wx}{, }\item[{int}]{wy}{, }\item[{int}]{level}{, }\item[{int \texorpdfstring{$\ast$}{*}}]{cx}{, }\item[{int \texorpdfstring{$\ast$}{*}}]{cy}{}\end{DoxyParamCaption})}
+
+
+
+Compute the hierarchical center of a region. 
+
+Computes the center coordinates of the region containing the given world cell at a specified hierarchical level. Higher levels correspond to larger structural groupings in the maze.
+
+
+\begin{DoxyParams}{Parameters}
+{\em wx} & World X coordinate of the cell. \\
+\hline
+{\em wy} & World Y coordinate of the cell. \\
+\hline
+{\em level} & Dead-\/end hierarchy level (0 = cell itself). \\
+\hline
+{\em cx} & Output pointer receiving the center X coordinate. \\
+\hline
+{\em cy} & Output pointer receiving the center Y coordinate. \\
+\hline
+{\em maze\+\_\+p} & Pointer to the root maze instance.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Complexity:\+ O(level)
+
+For level = 0, the returned center is (wx, wy). 
+
+For level = 1, the returned center is (wx \texorpdfstring{$\vert$}{|} 1, wy \&\texorpdfstring{$\sim$}{\string~}1). 
+\end{DoxyNote}
+\Hypertarget{infinite__maze_8h_a491c6a9998c9ce64d88b3a3a8a5c843d}\index{infinite\_maze.h@{infinite\_maze.h}!infinite\_maze\_is\_walkable@{infinite\_maze\_is\_walkable}}
+\index{infinite\_maze\_is\_walkable@{infinite\_maze\_is\_walkable}!infinite\_maze.h@{infinite\_maze.h}}
+\doxysubsubsection{\texorpdfstring{infinite\_maze\_is\_walkable()}{infinite\_maze\_is\_walkable()}}
+{\footnotesize\ttfamily \label{infinite__maze_8h_a491c6a9998c9ce64d88b3a3a8a5c843d} 
+API bool infinite\+\_\+maze\+\_\+is\+\_\+walkable (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{maze\+\_\+p}{, }\item[{int}]{wx}{, }\item[{int}]{wy}{}\end{DoxyParamCaption})}
+
+
+
+Test whether a world-\/space cell is walkable. 
+
+Determines if the given world coordinate corresponds to an open passage or a wall. Chunk generation may occur lazily if the required area has not been generated yet.
+
+
+\begin{DoxyParams}{Parameters}
+{\em wx} & World X coordinate. \\
+\hline
+{\em wy} & World Y coordinate. \\
+\hline
+{\em maze\+\_\+p} & Maze instance.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the cell is walkable, false otherwise.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Complexity:\+
+\end{DoxyNote}
+
+\begin{DoxyItemize}
+\item average:\+ O(1)
+\item worst:\+ O(ln(wx² + wy²)) if a new chunk is generated 
+\end{DoxyItemize}\Hypertarget{infinite__maze_8h_a48ea5e5d695df756191458a93c543137}\index{infinite\_maze.h@{infinite\_maze.h}!infinite\_maze\_new@{infinite\_maze\_new}}
+\index{infinite\_maze\_new@{infinite\_maze\_new}!infinite\_maze.h@{infinite\_maze.h}}
+\doxysubsubsection{\texorpdfstring{infinite\_maze\_new()}{infinite\_maze\_new()}}
+{\footnotesize\ttfamily \label{infinite__maze_8h_a48ea5e5d695df756191458a93c543137} 
+API void \texorpdfstring{$\ast$}{*} infinite\+\_\+maze\+\_\+new (\begin{DoxyParamCaption}\item[{int}]{seed}{}\end{DoxyParamCaption})}
+
+
+
+Create a new infinite procedurally generated maze. 
+
+Allocates and initializes the root chunk of an infinite maze. The maze is generated deterministically from the given seed. Additional chunks are generated lazily when accessed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em seed} & Initial random seed controlling maze generation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the maze instance (opaque handle), or NULL on failure.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Complexity:\+ O(1) 
+\end{DoxyNote}
+\Hypertarget{infinite__maze_8h_a55a7e853e09ab9461ae727fa64e567df}\index{infinite\_maze.h@{infinite\_maze.h}!infinite\_maze\_walk\_from\_to@{infinite\_maze\_walk\_from\_to}}
+\index{infinite\_maze\_walk\_from\_to@{infinite\_maze\_walk\_from\_to}!infinite\_maze.h@{infinite\_maze.h}}
+\doxysubsubsection{\texorpdfstring{infinite\_maze\_walk\_from\_to()}{infinite\_maze\_walk\_from\_to()}}
+{\footnotesize\ttfamily \label{infinite__maze_8h_a55a7e853e09ab9461ae727fa64e567df} 
+API void infinite\+\_\+maze\+\_\+walk\+\_\+from\+\_\+to (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{maze\+\_\+p}{, }\item[{int}]{fwx}{, }\item[{int}]{fwy}{, }\item[{int}]{twx}{, }\item[{int}]{twy}{, }\item[{void(\texorpdfstring{$\ast$}{*}}]{walker~}{)(int x, int y, void \texorpdfstring{$\ast$}{*}user\+\_\+data), }\item[{void \texorpdfstring{$\ast$}{*}}]{user\+\_\+data}{}\end{DoxyParamCaption})}
+
+
+
+Stream the unique shortest path between two world coordinates. 
+
+Computes and streams the deterministic shortest path between two world-\/space coordinates inside the given infinite maze.
+
+The maze being perfect (acyclic), the path is guaranteed to be unique.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fwx} & Starting world X coordinate (cell or corridor). \\
+\hline
+{\em fwy} & Starting world Y coordinate (cell or corridor). \\
+\hline
+{\em twx} & Target world X coordinate (cell or corridor). \\
+\hline
+{\em twy} & Target world Y coordinate (cell or corridor). \\
+\hline
+{\em maze\+\_\+p} & Pointer to a maze instance created by \doxylink{infinite__maze_8h_a48ea5e5d695df756191458a93c543137}{infinite\+\_\+maze\+\_\+new()}. \\
+\hline
+{\em walker} & Callback invoked for each world coordinate along the path. \\
+\hline
+{\em user\+\_\+data} & User-\/defined pointer passed unchanged to the callback.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Complexity:\+ O(\+L) = O(exp(d))
+\end{DoxyNote}
+where L is the number of world cells along the path. and d is the distance of the farest point to the origine.
+
+\begin{DoxyNote}{Note}
+The path is streamed in traversal order from start to target.
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+This function performs no internal synchronization. Concurrent calls must operate on distinct maze instances. 
+\end{DoxyWarning}
