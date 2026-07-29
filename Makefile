@@ -34,4 +34,8 @@ wasm:
 clean:
 	rm -rf $(BUILD_DIR)
 
-.PHONY: all clean
+docs: Doxyfile README.md
+	doxygen Doxyfile
+	cp -r demo docs/html/
+
+.PHONY: all clean docs wasm test

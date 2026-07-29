@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Infinite Maze C Library: Main Page</title>
+<title>Infinite Maze C Library: Infinite Maze 🧩</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,10 +87,214 @@ $(function(){initNavTree('index.html','',''); });
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">Infinite Maze C Library Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Infinite Maze 🧩 </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md_README"></a></p>
+<p>Single-header C library for infinite procedurally generated mazes <br  />
+ Chunk-based, deterministic, recursive DFS.</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+Features 🚀</h1>
+<p>This project implements an <b>infinite maze generator</b> ♾️.</p>
+<p>The maze is <b>perfect</b>: <br  />
+ for <b>any two points</b> in the maze, there exists <b>one and only one path</b> connecting them 🧵.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+Key properties</h2>
+<ul>
+<li>🌐 Infinite, procedurally generated maze <br  />
+</li>
+<li>🛤️ <b>Unique path</b> between any two positions <br  />
+</li>
+<li>📏 The connecting path is always <b>finite</b>, even though the maze itself is infinite <br  />
+</li>
+<li>🌲 Structurally equivalent to an infinite spanning tree <br  />
+</li>
+</ul>
+<p>This guarantees <b>no loops</b>, <b>no ambiguity</b>, and deterministic navigation throughout the maze.</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+Proof of Concept ⚠️</h1>
+<p>This project is a <b>proof of concept (PoC)</b> 🧪.</p>
+<p>It demonstrates that the core idea <b>works correctly</b>, but it is <b>not yet optimized</b> 🚧. <br  />
+ Performance, memory usage, and edge cases have <b>not</b> been the main focus so far.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+What this means</h2>
+<ul>
+<li>✅ Correctness over performance <br  />
+</li>
+<li>❌ Not production-ready <br  />
+</li>
+<li>🔧 Further <b>optimizations and refactoring are required</b></li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+Next steps</h2>
+<ul>
+<li>Improve algorithmic efficiency ⚡ <br  />
+</li>
+<li>Reduce memory footprint 🧠 <br  />
+</li>
+<li>Add benchmarks and profiling 📊 <br  />
+</li>
+</ul>
+<p>Contributions and optimization suggestions are <b>welcome</b> 🙌</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
+Usage 🔧</h1>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
+📚 API</h2>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
+🧩 Public API :</h1>
+<ul>
+<li><p class="startli">### infinite_maze_new</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span>* infinite_maze_new(<span class="keywordtype">int</span> seed);</div>
+</div><!-- fragment --><p class="startli">Create a new infinite procedurally generated maze.</p><ul>
+<li>Allocates and initializes the root chunk.</li>
+<li>Maze generation is <b>deterministic</b> with respect to <span class="tt">seed</span>.</li>
+<li>Additional chunks are generated <b>lazily</b> on access.</li>
+</ul>
+<p class="startli"><b>Parameters</b></p><ul>
+<li><span class="tt">seed</span> — Initial random seed controlling maze generation.</li>
+</ul>
+<p class="startli"><b>Returns</b></p><ul>
+<li>Opaque pointer to the maze instance.</li>
+<li><span class="tt">NULL</span> on allocation failure.</li>
+</ul>
+<p class="startli"><b>Complexity</b></p><ul>
+<li><b>O(1)</b></li>
+</ul>
+</li>
+<li><p class="startli">### infinite_maze_free</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> infinite_maze_free(<span class="keywordtype">void</span>* m);</div>
+</div><!-- fragment --><p class="startli">Free an infinite procedurally generated maze.</p><ul>
+<li>Recursively frees all generated chunks.</li>
+<li>Includes inner and outer mazes.</li>
+</ul>
+<p class="startli"><b>Parameters</b></p><ul>
+<li><span class="tt">m</span> — Maze instance returned by <span class="tt">infinite_maze_new()</span>.</li>
+</ul>
+<p class="startli"><b>Complexity</b></p><ul>
+<li><b>O(log(r))</b>, where <em>r</em> is the distance from the origin to the farthest generated cell.</li>
+</ul>
+<p class="startli"><b>Warning</b></p><ul>
+<li>All pointers obtained from this maze become invalid.</li>
+</ul>
+</li>
+<li><p class="startli">### infinite_maze_is_walkable</p>
+<div class="fragment"><div class="line"><span class="keywordtype">bool</span> infinite_maze_is_walkable(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy);</div>
+</div><!-- fragment --><p class="startli">Test whether a world-space cell is walkable.</p><ul>
+<li>Returns whether the cell is an open passage or a wall.</li>
+<li>May trigger lazy chunk generation.</li>
+</ul>
+<p class="startli"><b>Parameters</b></p><ul>
+<li><span class="tt">wx</span> — World X coordinate.</li>
+<li><span class="tt">wy</span> — World Y coordinate.</li>
+<li><span class="tt">maze_p</span> — Maze instance.</li>
+</ul>
+<p class="startli"><b>Returns</b></p><ul>
+<li><span class="tt">true</span> if walkable</li>
+<li><span class="tt">false</span> otherwise</li>
+</ul>
+<p class="startli"><b>Complexity</b></p><ul>
+<li>Average: <b>O(1)</b></li>
+<li>Worst case: <b>O(log(wx² + wy²))</b></li>
+</ul>
+</li>
+<li><p class="startli">### infinite_maze_get_cell</p>
+<div class="fragment"><div class="line">uint8_t infinite_maze_get_cell(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy);</div>
+</div><!-- fragment --><p class="startli">Retrieve hierarchical dead-end information for a world cell.</p>
+<p class="startli">Each bit of the returned byte encodes maze information:</p><ul>
+<li>Bit 0 : Walkability (1 = walkable, 0 = wall)</li>
+<li>Bit 1 : Dead-end at local chunk level</li>
+<li>Bits 2–7 : Dead-end status propagated through parent maze levels</li>
+</ul>
+<p class="startli"><b>Parameters</b></p><ul>
+<li><span class="tt">wx</span> — World-space X coordinate.</li>
+<li><span class="tt">wy</span> — World-space Y coordinate.</li>
+<li><span class="tt">maze_p</span> — Pointer to the root maze instance.</li>
+</ul>
+<p class="startli"><b>Returns</b></p><ul>
+<li>Encoded walkability and dead-end hierarchy information</li>
+<li><span class="tt">0</span> if <span class="tt">maze_p</span> is NULL</li>
+</ul>
+<p class="startli"><b>Complexity</b></p><ul>
+<li><b>O(log(|wx| + |wy|))</b></li>
+</ul>
+<p class="startli"><b>Notes</b></p><ul>
+<li>May trigger lazy generation of parent maze chunks. </li>
+</ul>
+</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
+- See <span class="tt">infinite_maze_is_walkable</span></h1>
+<ul>
+<li><p class="startli">### </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> infinite_maze_walk_from_to(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> fwx, <span class="keywordtype">int</span> fwy, <span class="keywordtype">int</span> twx, <span class="keywordtype">int</span> twy, </div>
+<div class="line">    <span class="keywordtype">void</span> (*walker)(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">void</span>* user_data), <span class="keywordtype">void</span>* user_data);</div>
+</div><!-- fragment --><p class="startli">Stream the unique shortest path between two world coordinates.</p>
+<p class="startli">Computes and streams the deterministic shortest path between two world-space coordinates inside the given infinite maze.</p>
+<p class="startli"><b>Parameters</b></p><ul>
+<li><span class="tt">maze_p</span> — Pointer to the root maze instance.</li>
+<li><span class="tt">fwx</span> Starting world X coordinate.</li>
+<li><span class="tt">fwy</span> Starting world Y coordinate.</li>
+<li><span class="tt">twx</span> Target world X coordinate.</li>
+<li><span class="tt">twy</span> Target world Y coordinate.</li>
+<li><span class="tt">walker</span> Callback invoked for each world coordinate along the path.</li>
+<li><span class="tt">user_data</span> User-defined pointer passed unchanged to the callback.</li>
+</ul>
+<p class="startli"><b>Complexity</b></p><ul>
+<li><b>O(L) = O(exp(d))</b> where L is the number of world cells along the path. and d is the distance of the farthest point to the origine.</li>
+</ul>
+<p class="startli"><b>Notes</b></p><ul>
+<li>The path is streamed in traversal order from start to target.</li>
+<li>Concurrent calls must operate on distinct maze instances.</li>
+</ul>
+</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
+🧪 Example</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define MAZE_RADIUS 2</span></div>
+<div class="line"><span class="preprocessor">#define INFINITE_MAZE_IMPLEMENTATION</span></div>
+<div class="line"><span class="preprocessor">#include &quot;infinite_maze.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">enum</span> biom_t {</div>
+<div class="line">  WALKABLE  = 0b001,</div>
+<div class="line">  DEAD_END  = 0b010,</div>
+<div class="line">  TINY_ROOM = 0b100,</div>
+<div class="line">};</div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">void</span> infinite_maze_print_ascii(<span class="keywordtype">void</span>* root, <span class="keywordtype">int</span> W, <span class="keywordtype">int</span> H) {</div>
+<div class="line">  <span class="keywordtype">int</span> minx = -W / 2, miny = -H / 2;</div>
+<div class="line">  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> y = H - 1; y &gt;= 0; y--) {</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> x = 0; x &lt; W; x++) {</div>
+<div class="line">      <span class="keywordtype">char</span> l = infinite_maze_get_cell(minx + x, miny + y, root);</div>
+<div class="line">      putchar(l &amp; WALKABLE ? (l &amp; DEAD_END ? <span class="charliteral">&#39;*&#39;</span> : <span class="charliteral">&#39; &#39;</span>) : 219);</div>
+<div class="line">      putchar(l &amp; WALKABLE ? (l &amp; TINY_ROOM ? <span class="charliteral">&#39;/&#39;</span> : <span class="charliteral">&#39; &#39;</span>) : 219);</div>
+<div class="line">    }</div>
+<div class="line">     putchar(<span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line">  }</div>
+<div class="line">  putchar(<span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">void</span>) {</div>
+<div class="line">  <span class="keywordtype">void</span>* root = infinite_maze_new(0xC0FFEE);</div>
+<div class="line"> </div>
+<div class="line">  infinite_maze_print_ascii(root, 64, 64);</div>
+<div class="line"> </div>
+<div class="line">  infinite_maze_free(root);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
+Demo</h1>
+<p>Try the interactive WebAssembly version:</p>
+<ul>
+<li><a href="demo/index.html">Browser Demo</a> </li>
+</ul>
+</div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->
 </div><!-- doc-content -->

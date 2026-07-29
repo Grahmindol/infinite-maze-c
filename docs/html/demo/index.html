@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Infinite Maze Demo</title>
+
+    <style>
+        html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #111;
+    }
+
+    canvas {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        image-rendering: pixelated;
+    }
+
+
+        #log {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <pre id="log"></pre>
+
+    <canvas id="canvas"></canvas>
+
+    <img id="tileset" src="./assets/tileset.png" hidden>
+
+    <script src="./infinite_maze.js"></script>
+
+    <script type="module">
+
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        const tileset = document.getElementById("tileset");
+
+        const log = (...args) => {
+            document.getElementById("log").textContent += args.join(" ") + "\n";
+            console.log(...args);
+        };
+
+
+        const TILE_SIZE = 32;
+        const TILE_STEP = 35;
+
+        const ZOOM = 2.0;
+
+
+        const TILE = {
+
+            misc: [0, 0],
+
+            semi_slab_outerline: [0, 1],
+            slab_outerline: [1, 1],
+            grass: [2, 1],
+            rock1: [3, 1],
+            rock2: [4, 1],
+            rock3: [5, 1],
+
+            semi_slab_water: [0, 2],
+            water: [1, 2],
+            grass2: [2, 2],
+            dirt: [3, 2],
+            stone: [4, 2],
+            wood1: [5, 2],
+            wood2: [6, 2],
+
+            semi_slab_water2: [0, 3],
+            water2: [1, 3],
+            grass3: [2, 3],
+            dirt2: [3, 3],
+            stone2: [4, 3],
+            wood3: [5, 3],
+            wood4: [6, 3],
+
+            semi_slab_water3: [0, 4],
+            water3: [1, 4],
+            grass4: [2, 4],
+            dirt3: [3, 4],
+            stone3: [4, 4],
+            wood5: [5, 4],
+            wood6: [6, 4],
+
+            empty: [0, 5],
+            dirt_with_grass: [1, 5],
+            skull: [2, 5],
+            empty2: [3, 5],
+            cracked_stone: [4, 5],
+            foliage1: [5, 5],
+            foliage2: [6, 5]
+        };
+
+
+        function drawTile(tx, ty, x, y) {
+            const sx = tx * TILE_STEP-1;
+            const sy = ty * TILE_STEP+1;
+
+            ctx.drawImage(
+                tileset,
+                sx,
+                sy,
+                TILE_SIZE,
+                TILE_SIZE,
+                x,
+                y,
+                TILE_SIZE * ZOOM,
+                TILE_SIZE * ZOOM
+            );
+        }
+
+
+        let camX = 0;
+        let camY = 0;
+
+        function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            window.addEventListener("resize", resizeCanvas);
+            resizeCanvas();
+
+
+        function drawMaze(Module, maze) {
+            const radius = 32;
+
+            const isoW = 32;
+            const isoH = 16;
+
+
+            canvas.width = 2*radius * isoW + 128;
+            canvas.height = 2*radius * isoH + 128;
+
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            /*
+                draw far tiles first
+                gives correct iso depth
+            */
+            for (let sum = -radius * 2; sum <= radius * 2; sum++) {
+                for (let wx = -radius; wx <= radius; wx++) {
+                    let wy = sum - wx;
+
+                    if (wy < -radius || wy > radius)
+                        continue;
+
+
+                    const mx = wx + camX;
+                    const my = wy + camY;
+
+
+                    const cell =
+                        Module._infinite_maze_get_cell(
+                            maze,
+                            mx,
+                            my
+                        );
+
+
+                    let tile;
+
+                    if (cell & 8)
+                        tile = TILE.dirt;
+                    else if (cell & 4)
+                        tile = TILE.grass2;
+                    else if (cell & 2)
+                        tile = TILE.wood1;
+                    else if (cell & 1)
+                        tile = TILE.stone;
+                    else
+                        tile = TILE.empty;
+
+
+                    const sx = (wx - wy) * (isoW / 2) * ZOOM;
+                    const sy = (wx + wy) * (isoH / 2) * ZOOM;
+
+
+                    const px =
+                        sx + canvas.width / 2
+                        - TILE_SIZE * ZOOM / 2;
+
+
+                    const py =
+                        sy + canvas.height / 2
+                        - TILE_SIZE * ZOOM / 2;
+
+
+                    drawTile(
+                        tile[0],
+                        tile[1],
+                        px,
+                        py
+                    );
+                }
+            }
+        }
+
+
+        const Module = await InfiniteMazeModule();
+
+        log("Module loaded");
+
+
+        const maze =
+            Module._infinite_maze_new(12345);
+
+
+        log("Maze:", maze);
+
+
+        tileset.onload = () => {
+            drawMaze(Module, maze);
+        };
+
+
+        if (tileset.complete) {
+            drawMaze(Module, maze);
+        }
+
+
+
+        window.addEventListener("keydown", e => {
+            switch (e.key) {
+                case "ArrowUp":
+                    camY--;
+                    break;
+
+                case "ArrowDown":
+                    camY++;
+                    break;
+
+                case "ArrowLeft":
+                    camX--;
+                    break;
+
+                case "ArrowRight":
+                    camX++;
+                    break;
+
+                default:
+                    return;
+            }
+
+
+            drawMaze(Module, maze);
+        });
+
+    </script>
+
+</body>
+
+</html>

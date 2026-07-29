@@ -1,19 +1,22 @@
+# Nom du projet
 PROJECT_NAME = "Infinite Maze C Library"
 
-INPUT = infinite_maze.h
+# Fichiers à documenter
+INPUT = infinite_maze.h README.md
 
-FILE_PATTERNS = *.h *.c
+FILE_PATTERNS = *.h *.c *.md
 
+# Génération
 OUTPUT_DIRECTORY = docs
-
 GENERATE_HTML = YES
-
-EXTRACT_ALL = YES
-
-EXTRACT_STATIC = YES
-
-WARN_IF_UNDOCUMENTED = YES
-
-HAVE_DOT = YES
-
 OPTIMIZE_OUTPUT_FOR_C = YES
+
+# Utiliser le README comme page d'accueil
+USE_MDFILE_AS_MAINPAGE = ./README.md
+
+# Copier le dossier demo dans docs/html
+HTML_EXTRA_FILES = ./demo/*
+
+# (optionnel mais conseillé)
+RECURSIVE = YES
+MARKDOWN_SUPPORT = YES

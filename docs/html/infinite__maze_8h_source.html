@@ -91,7 +91,7 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
   <div class="headertitle"><div class="title">infinite_maze.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="infinite__maze_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef INFINITE_MAZE_H</span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef INFINITE_MAZE_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define INFINITE_MAZE_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
@@ -164,7 +164,7 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="preprocessor">#ifndef MAZE_RADIUS</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">   74</a></span><span class="preprocessor">#define MAZE_RADIUS 1</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#define MAZE_RADIUS 1</span></div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#ifdef __EMSCRIPTEN__</span></div>
@@ -183,19 +183,19 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">   ======= API ===========</span></div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">   ======================= */</span></div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="infinite__maze_8h.html#a48ea5e5d695df756191458a93c543137">  106</a></span>API <span class="keywordtype">void</span>* <a class="code hl_function" href="infinite__maze_8h.html#a48ea5e5d695df756191458a93c543137">infinite_maze_new</a>(<span class="keywordtype">int</span> seed);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>API <span class="keywordtype">void</span>* infinite_maze_new(<span class="keywordtype">int</span> seed);</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="infinite__maze_8h.html#a6cf669e5737ee641aaa20bcedc022322">  122</a></span>API <span class="keywordtype">void</span> <a class="code hl_function" href="infinite__maze_8h.html#a6cf669e5737ee641aaa20bcedc022322">infinite_maze_free</a>(<span class="keywordtype">void</span>* m);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>API <span class="keywordtype">void</span> infinite_maze_free(<span class="keywordtype">void</span>* m);</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span></div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="infinite__maze_8h.html#a491c6a9998c9ce64d88b3a3a8a5c843d">  144</a></span>API <span class="keywordtype">bool</span> <a class="code hl_function" href="infinite__maze_8h.html#a491c6a9998c9ce64d88b3a3a8a5c843d">infinite_maze_is_walkable</a>(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>API <span class="keywordtype">bool</span> infinite_maze_is_walkable(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy);</div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span></div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="infinite__maze_8h.html#ac8b9f96bc4fcca3f0428dd31d5839b49">  179</a></span>API uint8_t <a class="code hl_function" href="infinite__maze_8h.html#ac8b9f96bc4fcca3f0428dd31d5839b49">infinite_maze_get_cell</a>(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>API uint8_t infinite_maze_get_cell(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy);</div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span></div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno"><a class="line" href="infinite__maze_8h.html#a2286ca1218ab4743745f80c48e04d1b8">  210</a></span>API uint8_t <a class="code hl_function" href="infinite__maze_8h.html#a2286ca1218ab4743745f80c48e04d1b8">infinite_maze_get_fixedness</a>(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy);</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>API uint8_t infinite_maze_get_fixedness(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy);</div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span></div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="infinite__maze_8h.html#a10f439f3c521c35020e0420756c6c7fd">  231</a></span>API <span class="keywordtype">void</span> <a class="code hl_function" href="infinite__maze_8h.html#a10f439f3c521c35020e0420756c6c7fd">infinite_maze_get_region_center</a>(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy, <span class="keywordtype">int</span> level, <span class="keywordtype">int</span>* cx, <span class="keywordtype">int</span>* cy);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>API <span class="keywordtype">void</span> infinite_maze_get_region_center(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy, <span class="keywordtype">int</span> level, <span class="keywordtype">int</span>* cx, <span class="keywordtype">int</span>* cy);</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span></div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno"><a class="line" href="infinite__maze_8h.html#a55a7e853e09ab9461ae727fa64e567df">  259</a></span>API <span class="keywordtype">void</span> <a class="code hl_function" href="infinite__maze_8h.html#a55a7e853e09ab9461ae727fa64e567df">infinite_maze_walk_from_to</a>(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> fwx, <span class="keywordtype">int</span> fwy, <span class="keywordtype">int</span> twx, <span class="keywordtype">int</span> twy,</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>API <span class="keywordtype">void</span> infinite_maze_walk_from_to(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> fwx, <span class="keywordtype">int</span> fwy, <span class="keywordtype">int</span> twx, <span class="keywordtype">int</span> twy,</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>                            <span class="keywordtype">void</span> (*walker)(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">void</span>* user_data), <span class="keywordtype">void</span>* user_data);</div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="comment">/* =======================</span></div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="comment">   === IMPLEMENTATION ====</span></div>
@@ -237,9 +237,9 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
 <div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span><span class="keyword">static</span> <span class="keyword">inline</span> node_t* _node(maze_t* m, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y) {</div>
 <div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  <span class="keywordflow">if</span> (!m) <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>  <span class="keywordtype">int</span> size = 2 * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> + 1;</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>  <span class="keywordtype">int</span> ix = x + <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>;</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  <span class="keywordtype">int</span> iy = y + <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>  <span class="keywordtype">int</span> size = 2 * MAZE_RADIUS + 1;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>  <span class="keywordtype">int</span> ix = x + MAZE_RADIUS;</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  <span class="keywordtype">int</span> iy = y + MAZE_RADIUS;</div>
 <div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  <span class="keywordflow">if</span> (ix &lt; 0 || ix &gt;= size || iy &lt; 0 || iy &gt;= size) <span class="keywordflow">return</span> NULL;</div>
 <div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>  <span class="keywordflow">return</span> &amp;m-&gt;data[iy * size + ix];</div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>}</div>
@@ -273,12 +273,12 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>}</div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span> </div>
 <div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> _world_to_chunk(<span class="keyword">const</span> <span class="keywordtype">int</span> wx, <span class="keyword">const</span> <span class="keywordtype">int</span> wy, <span class="keywordtype">int</span>* cx, <span class="keywordtype">int</span>* cy, <span class="keywordtype">int</span>* lx, <span class="keywordtype">int</span>* ly) {</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> size = 2 * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> + 1;</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> size = 2 * MAZE_RADIUS + 1;</div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> sx = (wx &gt; 0) - (wx &lt; 0);</div>
 <div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> sy = (wy &gt; 0) - (wy &lt; 0);</div>
 <div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span> </div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>  *cx = (wx + sx * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>) / size;</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>  *cy = (wy + sy * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>) / size;</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>  *cx = (wx + sx * MAZE_RADIUS) / size;</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>  *cy = (wy + sy * MAZE_RADIUS) / size;</div>
 <div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>  *lx = wx - (*cx) * size;</div>
 <div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>  *ly = wy - (*cy) * size;</div>
 <div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>}</div>
@@ -297,8 +297,8 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>  <span class="keywordflow">if</span> (!m || !m-&gt;outer_node) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span> </div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> d = 0; d &lt; DIR_COUNT; d++) {</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    <span class="keywordtype">int</span> dx = <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> * DIR_DX[d];</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    <span class="keywordtype">int</span> dy = <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> * DIR_DY[d];</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    <span class="keywordtype">int</span> dx = MAZE_RADIUS * DIR_DX[d];</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>    <span class="keywordtype">int</span> dy = MAZE_RADIUS * DIR_DY[d];</div>
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    node_t* n = _node(m, dx, dy);</div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    <span class="keywordflow">if</span> ((n-&gt;is_open[d] = m-&gt;outer_node-&gt;is_open[d])) _fix_parent_path(m, dx, dy);</div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span> </div>
@@ -307,13 +307,13 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>}</div>
 <div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span></div>
 <div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span><span class="keyword">static</span> node_t* _get_raw_cell(<span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy, maze_t* root) {</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>  <span class="keywordflow">if</span> (abs(wx) &lt;= <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> &amp;&amp; abs(wy) &lt;= <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>) <span class="keywordflow">return</span> _node(root, wx, wy);</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>  <span class="keywordflow">if</span> (abs(wx) &lt;= MAZE_RADIUS &amp;&amp; abs(wy) &lt;= MAZE_RADIUS) <span class="keywordflow">return</span> _node(root, wx, wy);</div>
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span> </div>
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>  <span class="keywordtype">int</span> cx, cy, lx, ly;</div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>  _world_to_chunk(wx, wy, &amp;cx, &amp;cy, &amp;lx, &amp;ly);</div>
 <div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span> </div>
 <div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>  <span class="keywordflow">if</span> (!root-&gt;outer_node) {</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    maze_t* outer_maze = (maze_t*)<a class="code hl_function" href="infinite__maze_8h.html#a48ea5e5d695df756191458a93c543137">infinite_maze_new</a>(root-&gt;seed + 1);</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    maze_t* outer_maze = (maze_t*)infinite_maze_new(root-&gt;seed + 1);</div>
 <div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    root-&gt;outer_node = _node(outer_maze, 0, 0);</div>
 <div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    root-&gt;outer_node-&gt;inner_maze = root;</div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    _update_chunk_aperture(root);</div>
@@ -324,7 +324,7 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
 <div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>  <span class="keywordflow">if</span> (!outer_node-&gt;inner_maze) {</div>
 <div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    outer_node-&gt;inner_maze =</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>        (maze_t*)<a class="code hl_function" href="infinite__maze_8h.html#a48ea5e5d695df756191458a93c543137">infinite_maze_new</a>(outer_maze-&gt;seed ^ (<span class="keywordtype">long</span> <span class="keywordtype">long</span>)(cx) * 0x9E3779B185EBCA87ULL ^</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>        (maze_t*)infinite_maze_new(outer_maze-&gt;seed ^ (<span class="keywordtype">long</span> <span class="keywordtype">long</span>)(cx) * 0x9E3779B185EBCA87ULL ^</div>
 <div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>                                   (<span class="keywordtype">long</span> <span class="keywordtype">long</span>)(cy) * 0xC2B2AE3D27D4EB4FULL);</div>
 <div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>    outer_node-&gt;inner_maze-&gt;outer_node = outer_node;</div>
 <div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>    _update_chunk_aperture(outer_node-&gt;inner_maze);</div>
@@ -340,12 +340,12 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>  <span class="keywordtype">int</span> cx, cy, lx, ly;</div>
 <div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>  _world_to_chunk(wx, wy, &amp;cx, &amp;cy, &amp;lx, &amp;ly);</div>
 <div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span> </div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>  <span class="keywordflow">if</span> ((abs(lx) != <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> &amp;&amp; abs(ly) != <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>)) <span class="keywordflow">return</span> base_node;</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>  <span class="keywordflow">if</span> ((abs(lx) != MAZE_RADIUS &amp;&amp; abs(ly) != MAZE_RADIUS)) <span class="keywordflow">return</span> base_node;</div>
 <div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span> </div>
 <div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>  uint64_t s =</div>
 <div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>      (base_node-&gt;outer_maze-&gt;seed ^ (lx) * 0x9E3779B185EBCA87ULL ^ (ly) * 0xC2B2AE3D27D4EB4FULL);</div>
 <div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span> </div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>  <span class="keywordflow">if</span> (lx == -<a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> &amp;&amp; ly != 0 &amp;&amp; rng(&amp;s) &amp; 0b11) {</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>  <span class="keywordflow">if</span> (lx == -MAZE_RADIUS &amp;&amp; ly != 0 &amp;&amp; rng(&amp;s) &amp; 0b11) {</div>
 <div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>    base_node-&gt;is_open[DIR_W] = 1;</div>
 <div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>    _get_raw_cell(wx - 1, wy, root)-&gt;is_open[DIR_E] = 1;</div>
 <div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span> </div>
@@ -355,7 +355,7 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>        -&gt;is_open[DIR_OPP[base_node-&gt;parent_direction]] = 0;</div>
 <div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span> </div>
 <div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>    base_node-&gt;parent_direction = DIR_W;</div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ly == <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> &amp;&amp; lx != 0 &amp;&amp; rng(&amp;s) &amp; 0b11) {</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ly == MAZE_RADIUS &amp;&amp; lx != 0 &amp;&amp; rng(&amp;s) &amp; 0b11) {</div>
 <div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>    base_node-&gt;is_open[DIR_N] = 1;</div>
 <div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>    _get_raw_cell(wx, wy + 1, root)-&gt;is_open[DIR_S] = 1;</div>
 <div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span> </div>
@@ -371,8 +371,8 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>  <span class="keywordflow">return</span> base_node;</div>
 <div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>}</div>
 <div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span> </div>
-<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>API <span class="keywordtype">void</span>* <a class="code hl_function" href="infinite__maze_8h.html#a48ea5e5d695df756191458a93c543137">infinite_maze_new</a>(<span class="keywordtype">int</span> seed) {</div>
-<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>  <span class="keywordtype">int</span> size = 2 * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> + 1;</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>API <span class="keywordtype">void</span>* infinite_maze_new(<span class="keywordtype">int</span> seed) {</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>  <span class="keywordtype">int</span> size = 2 * MAZE_RADIUS + 1;</div>
 <div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>  maze_t* m = calloc(1, <span class="keyword">sizeof</span>(*m));</div>
 <div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>  m-&gt;seed = seed;</div>
 <div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>  m-&gt;data = calloc(size * size, <span class="keyword">sizeof</span>(node_t));</div>
@@ -381,21 +381,21 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>  <span class="keywordflow">return</span> (<span class="keywordtype">void</span>*)m;</div>
 <div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>}</div>
 <div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span> </div>
-<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>API <span class="keywordtype">void</span> <a class="code hl_function" href="infinite__maze_8h.html#a6cf669e5737ee641aaa20bcedc022322">infinite_maze_free</a>(<span class="keywordtype">void</span>* maze_p) {</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>API <span class="keywordtype">void</span> infinite_maze_free(<span class="keywordtype">void</span>* maze_p) {</div>
 <div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>  <span class="keywordflow">if</span> (!maze_p) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>  maze_t* m = (maze_t*)maze_p;</div>
 <div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span> </div>
 <div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>  <span class="keywordflow">if</span> (m-&gt;outer_node) {</div>
-<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>    <a class="code hl_function" href="infinite__maze_8h.html#a6cf669e5737ee641aaa20bcedc022322">infinite_maze_free</a>(m-&gt;outer_node-&gt;outer_maze);</div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>    infinite_maze_free(m-&gt;outer_node-&gt;outer_maze);</div>
 <div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>  }</div>
 <div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span> </div>
-<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> y = -<a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>; y &lt;= <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>; y++) {</div>
-<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> x = -<a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>; x &lt;= <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>; x++) {</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> y = -MAZE_RADIUS; y &lt;= MAZE_RADIUS; y++) {</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> x = -MAZE_RADIUS; x &lt;= MAZE_RADIUS; x++) {</div>
 <div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>      node_t* n = _node(m, x, y);</div>
 <div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>      <span class="keywordflow">if</span> (n-&gt;inner_maze) {</div>
 <div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>        n-&gt;inner_maze-&gt;outer_node = NULL;</div>
-<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>        <a class="code hl_function" href="infinite__maze_8h.html#a6cf669e5737ee641aaa20bcedc022322">infinite_maze_free</a>(n-&gt;inner_maze);</div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>        infinite_maze_free(n-&gt;inner_maze);</div>
 <div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>      }</div>
 <div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>    }</div>
 <div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>  }</div>
@@ -404,7 +404,7 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span>  free(m);</div>
 <div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>}</div>
 <div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span> </div>
-<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>API <span class="keywordtype">bool</span> <a class="code hl_function" href="infinite__maze_8h.html#a491c6a9998c9ce64d88b3a3a8a5c843d">infinite_maze_is_walkable</a>(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy) {</div>
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>API <span class="keywordtype">bool</span> infinite_maze_is_walkable(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy) {</div>
 <div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span>  <span class="keywordflow">if</span> (!maze_p) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span>  <span class="keywordflow">if</span> ((wx ^ wy) &amp; 1) <span class="keywordflow">return</span> wx &amp; 1;</div>
 <div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span> </div>
@@ -419,13 +419,13 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00482" name="l00482"></a><span class="lineno">  482</span>  <span class="keywordflow">return</span> _get_refined_cell(x, y, root)-&gt;is_open[!(wx &amp; 1)];</div>
 <div class="line"><a id="l00483" name="l00483"></a><span class="lineno">  483</span>}</div>
 <div class="line"><a id="l00484" name="l00484"></a><span class="lineno">  484</span> </div>
-<div class="line"><a id="l00485" name="l00485"></a><span class="lineno">  485</span>API <span class="keywordtype">void</span> <a class="code hl_function" href="infinite__maze_8h.html#a10f439f3c521c35020e0420756c6c7fd">infinite_maze_get_region_center</a>(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy, <span class="keywordtype">int</span> level, <span class="keywordtype">int</span>* cx, <span class="keywordtype">int</span>* cy) {</div>
+<div class="line"><a id="l00485" name="l00485"></a><span class="lineno">  485</span>API <span class="keywordtype">void</span> infinite_maze_get_region_center(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy, <span class="keywordtype">int</span> level, <span class="keywordtype">int</span>* cx, <span class="keywordtype">int</span>* cy) {</div>
 <div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span>  *cx = wx;</div>
 <div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span>  *cy = wy;</div>
 <div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span> </div>
 <div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span>  <span class="keywordflow">if</span> (level &lt;= 0) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span> </div>
-<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> size = 2 * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> + 1;</div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> size = 2 * MAZE_RADIUS + 1;</div>
 <div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span> </div>
 <div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span>  *cx &gt;&gt;= 1;</div>
 <div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>  *cy &gt;&gt;= 1;</div>
@@ -448,8 +448,8 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>    <span class="keywordtype">int</span> sx = (*cx &gt; 0) - (*cx &lt; 0);</div>
 <div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>    <span class="keywordtype">int</span> sy = (*cy &gt; 0) - (*cy &lt; 0);</div>
 <div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span> </div>
-<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>    *cx = (*cx + sx * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>) / size;</div>
-<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>    *cy = (*cy + sy * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>) / size;</div>
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>    *cx = (*cx + sx * MAZE_RADIUS) / size;</div>
+<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>    *cy = (*cy + sy * MAZE_RADIUS) / size;</div>
 <div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>  }</div>
 <div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span> </div>
 <div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; level; ++i) {</div>
@@ -466,17 +466,17 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span><span class="keyword">static</span> uint8_t _get_cell_impl(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy, node_predicate_t predicate) {</div>
 <div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>  <span class="keywordflow">if</span> (!maze_p) <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>  maze_t* root = maze_p;</div>
-<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> size = 2 * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> + 1;</div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>  <span class="keyword">const</span> <span class="keywordtype">int</span> size = 2 * MAZE_RADIUS + 1;</div>
 <div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span> </div>
 <div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>  node_t* n = _get_raw_cell(wx &gt;&gt; 1, wy &gt;&gt; 1, root);</div>
-<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>  uint8_t res = <a class="code hl_function" href="infinite__maze_8h.html#a491c6a9998c9ce64d88b3a3a8a5c843d">infinite_maze_is_walkable</a>(maze_p, wx, wy);</div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>  uint8_t res = infinite_maze_is_walkable(maze_p, wx, wy);</div>
 <div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>  <span class="keywordflow">if</span> (wy &amp; 1 || ~wx &amp; 1) {</div>
 <div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>    <span class="keywordtype">int</span> xa, ya, xb, yb;</div>
 <div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>    <span class="keywordflow">if</span> (wy &amp; 1) {</div>
 <div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>      uint8_t neib = _get_cell_impl(maze_p, wx, wy - 1, predicate);</div>
 <div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 2; i &lt; 8; i++) {</div>
-<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>        <a class="code hl_function" href="infinite__maze_8h.html#a10f439f3c521c35020e0420756c6c7fd">infinite_maze_get_region_center</a>(maze_p, wx, wy + 1, i, &amp;xa, &amp;ya);</div>
-<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>        <a class="code hl_function" href="infinite__maze_8h.html#a10f439f3c521c35020e0420756c6c7fd">infinite_maze_get_region_center</a>(maze_p, wx, wy - 1, i, &amp;xb, &amp;yb);</div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>        infinite_maze_get_region_center(maze_p, wx, wy + 1, i, &amp;xa, &amp;ya);</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>        infinite_maze_get_region_center(maze_p, wx, wy - 1, i, &amp;xb, &amp;yb);</div>
 <div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span> </div>
 <div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>        <span class="keywordflow">if</span> (xa == xb &amp;&amp; ya == yb) {</div>
 <div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>          res |= neib &amp; (1 &lt;&lt; i);</div>
@@ -488,8 +488,8 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>    <span class="keywordflow">if</span> (~wx &amp; 1) {</div>
 <div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>      uint8_t neib = _get_cell_impl(maze_p, wx + 1, wy, predicate);</div>
 <div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 2; i &lt; 8; i++) {</div>
-<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>        <a class="code hl_function" href="infinite__maze_8h.html#a10f439f3c521c35020e0420756c6c7fd">infinite_maze_get_region_center</a>(maze_p, wx + 1, wy, i, &amp;xa, &amp;ya);</div>
-<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>        <a class="code hl_function" href="infinite__maze_8h.html#a10f439f3c521c35020e0420756c6c7fd">infinite_maze_get_region_center</a>(maze_p, wx - 1, wy, i, &amp;xb, &amp;yb);</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>        infinite_maze_get_region_center(maze_p, wx + 1, wy, i, &amp;xa, &amp;ya);</div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>        infinite_maze_get_region_center(maze_p, wx - 1, wy, i, &amp;xb, &amp;yb);</div>
 <div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span> </div>
 <div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>        <span class="keywordflow">if</span> (xa == xb &amp;&amp; ya == yb) {</div>
 <div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>          res |= neib &amp; (1 &lt;&lt; i);</div>
@@ -501,12 +501,12 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>    <span class="keywordflow">if</span> (~wx &amp; 1 &amp;&amp; wy &amp; 1) {</div>
 <div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>      uint8_t neib = _get_cell_impl(maze_p, wx + 1, wy - 1, predicate);</div>
 <div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 2; i &lt; 8; i++) {</div>
-<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>        <a class="code hl_function" href="infinite__maze_8h.html#a10f439f3c521c35020e0420756c6c7fd">infinite_maze_get_region_center</a>(maze_p, wx + 1, wy - 1, i, &amp;xa, &amp;ya);</div>
-<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>        <a class="code hl_function" href="infinite__maze_8h.html#a10f439f3c521c35020e0420756c6c7fd">infinite_maze_get_region_center</a>(maze_p, wx - 1, wy + 1, i, &amp;xb, &amp;yb);</div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>        infinite_maze_get_region_center(maze_p, wx + 1, wy - 1, i, &amp;xa, &amp;ya);</div>
+<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>        infinite_maze_get_region_center(maze_p, wx - 1, wy + 1, i, &amp;xb, &amp;yb);</div>
 <div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span> </div>
 <div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>        <span class="keywordflow">if</span> (xa == xb &amp;&amp; ya == yb) {</div>
-<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>          <a class="code hl_function" href="infinite__maze_8h.html#a10f439f3c521c35020e0420756c6c7fd">infinite_maze_get_region_center</a>(maze_p, wx - 1, wy - 1, i, &amp;xa, &amp;ya);</div>
-<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>          <a class="code hl_function" href="infinite__maze_8h.html#a10f439f3c521c35020e0420756c6c7fd">infinite_maze_get_region_center</a>(maze_p, wx + 1, wy + 1, i, &amp;xb, &amp;yb);</div>
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>          infinite_maze_get_region_center(maze_p, wx - 1, wy - 1, i, &amp;xa, &amp;ya);</div>
+<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>          infinite_maze_get_region_center(maze_p, wx + 1, wy + 1, i, &amp;xb, &amp;yb);</div>
 <div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>          <span class="keywordflow">if</span> (xa == xb &amp;&amp; ya == yb) {</div>
 <div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>            res |= neib &amp; (1 &lt;&lt; i);</div>
 <div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>          } <span class="keywordflow">else</span> {</div>
@@ -521,16 +521,16 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>  }</div>
 <div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span> </div>
 <div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>  res |= predicate(n) &lt;&lt; 1;</div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>  <a class="code hl_function" href="infinite__maze_8h.html#a10f439f3c521c35020e0420756c6c7fd">infinite_maze_get_region_center</a>(maze_p, wx, wy, 2, &amp;wx, &amp;wy);</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>  infinite_maze_get_region_center(maze_p, wx, wy, 2, &amp;wx, &amp;wy);</div>
 <div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>  <span class="keywordtype">int</span> x = wx &gt;&gt; 1, y = wy &gt;&gt; 1;</div>
 <div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span> </div>
 <div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 2; i &lt; 8; i++) {</div>
-<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>    <span class="keywordflow">if</span> (!root-&gt;outer_node) _get_raw_cell(x, y + (2 * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> + 1), root);</div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>    <span class="keywordflow">if</span> (!root-&gt;outer_node) _get_raw_cell(x, y + (2 * MAZE_RADIUS + 1), root);</div>
 <div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>    root = root-&gt;outer_node-&gt;outer_maze;</div>
 <div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span> </div>
 <div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> sx = (x &gt; 0) - (x &lt; 0), sy = (y &gt; 0) - (y &lt; 0);</div>
-<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> cx = (x + sx * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>) / size;</div>
-<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> cy = (y + sy * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>) / size;</div>
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> cx = (x + sx * MAZE_RADIUS) / size;</div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> cy = (y + sy * MAZE_RADIUS) / size;</div>
 <div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span> </div>
 <div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>    x = cx;</div>
 <div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>    y = cy;</div>
@@ -545,13 +545,13 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>  <span class="keywordflow">return</span> (n-&gt;is_open[0] + n-&gt;is_open[1] + n-&gt;is_open[2] + n-&gt;is_open[3]) == 1;</div>
 <div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>}</div>
 <div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span> </div>
-<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>API uint8_t <a class="code hl_function" href="infinite__maze_8h.html#ac8b9f96bc4fcca3f0428dd31d5839b49">infinite_maze_get_cell</a>(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy) {</div>
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>API uint8_t infinite_maze_get_cell(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy) {</div>
 <div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>  <span class="keywordflow">return</span> _get_cell_impl(maze_p, wx, wy, _is_dead_end);</div>
 <div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>}</div>
 <div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span> </div>
 <div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span><span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> _is_fixed(<span class="keyword">const</span> node_t* n) { <span class="keywordflow">return</span> !!n-&gt;is_fixed; }</div>
 <div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span> </div>
-<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>API uint8_t <a class="code hl_function" href="infinite__maze_8h.html#a2286ca1218ab4743745f80c48e04d1b8">infinite_maze_get_fixedness</a>(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy) {</div>
+<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>API uint8_t infinite_maze_get_fixedness(<span class="keywordtype">void</span>* maze_p, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy) {</div>
 <div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>  <span class="keywordflow">return</span> _get_cell_impl(maze_p, wx, wy, _is_fixed);</div>
 <div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>}</div>
 <div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span> </div>
@@ -610,7 +610,7 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>}</div>
 <div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span> </div>
 <div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span><span class="keyword">static</span> <span class="keyword">inline</span> path_t _get_path_to_root(maze_t* m, <span class="keywordtype">int</span> wx, <span class="keywordtype">int</span> wy) {</div>
-<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>  <span class="keywordtype">int</span> cap = (2 * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> + 1);</div>
+<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>  <span class="keywordtype">int</span> cap = (2 * MAZE_RADIUS + 1);</div>
 <div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>  cap = cap * cap;</div>
 <div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span> </div>
 <div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>  path_t path = _path_create(cap);</div>
@@ -693,9 +693,9 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span> </div>
 <div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span>  path_t high = _hierarchical_path(acrx, acry, bcrx, bcry, maze-&gt;outer_node-&gt;outer_maze);</div>
 <div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span> </div>
-<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>  path_t middle = _path_create((2 * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> + 1) * (2 * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> + 1));</div>
+<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>  path_t middle = _path_create((2 * MAZE_RADIUS + 1) * (2 * MAZE_RADIUS + 1));</div>
 <div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span> </div>
-<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span>  <span class="keywordtype">int</span> dim = 2 * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a> + 1;</div>
+<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span>  <span class="keywordtype">int</span> dim = 2 * MAZE_RADIUS + 1;</div>
 <div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span> </div>
 <div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; high.size; ++i) {</div>
 <div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>    point_t h = high.data[i];</div>
@@ -708,8 +708,8 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span>      <span class="keywordtype">int</span> dx = (hp.x &gt; h.x) - (hp.x &lt; h.x);</div>
 <div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span>      <span class="keywordtype">int</span> dy = (hp.y &gt; h.y) - (hp.y &lt; h.y);</div>
 <div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span> </div>
-<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>      in.x += dx * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>;</div>
-<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>      in.y += dy * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>;</div>
+<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>      in.x += dx * MAZE_RADIUS;</div>
+<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>      in.y += dy * MAZE_RADIUS;</div>
 <div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span>      in.x = fwx;</div>
 <div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span>      in.y = fwy;</div>
@@ -720,8 +720,8 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span>      <span class="keywordtype">int</span> dx = (hn.x &gt; h.x) - (hn.x &lt; h.x);</div>
 <div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>      <span class="keywordtype">int</span> dy = (hn.y &gt; h.y) - (hn.y &lt; h.y);</div>
 <div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span> </div>
-<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>      out.x += dx * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>;</div>
-<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>      out.y += dy * <a class="code hl_define" href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a>;</div>
+<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>      out.x += dx * MAZE_RADIUS;</div>
+<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>      out.y += dy * MAZE_RADIUS;</div>
 <div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span>    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span>      out.x = twx;</div>
 <div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>      out.y = twy;</div>
@@ -790,21 +790,13 @@ $(function(){initNavTree('infinite__maze_8h_source.html','',''); });
 <div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span> </div>
 <div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span><span class="preprocessor">#endif </span><span class="comment">/* INFINITE_MAZE_IMPLEMENTATION */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span><span class="preprocessor">#endif </span><span class="comment">/* INFINITE_MAZE_H */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="ainfinite__maze_8h_html_a10f439f3c521c35020e0420756c6c7fd"><div class="ttname"><a href="infinite__maze_8h.html#a10f439f3c521c35020e0420756c6c7fd">infinite_maze_get_region_center</a></div><div class="ttdeci">API void infinite_maze_get_region_center(void *maze_p, int wx, int wy, int level, int *cx, int *cy)</div><div class="ttdoc">Compute the hierarchical center of a region.</div></div>
-<div class="ttc" id="ainfinite__maze_8h_html_a2286ca1218ab4743745f80c48e04d1b8"><div class="ttname"><a href="infinite__maze_8h.html#a2286ca1218ab4743745f80c48e04d1b8">infinite_maze_get_fixedness</a></div><div class="ttdeci">API uint8_t infinite_maze_get_fixedness(void *maze_p, int wx, int wy)</div><div class="ttdoc">Retrieve hierarchical dead-end information for a world cell.</div></div>
-<div class="ttc" id="ainfinite__maze_8h_html_a48ea5e5d695df756191458a93c543137"><div class="ttname"><a href="infinite__maze_8h.html#a48ea5e5d695df756191458a93c543137">infinite_maze_new</a></div><div class="ttdeci">API void * infinite_maze_new(int seed)</div><div class="ttdoc">Create a new infinite procedurally generated maze.</div></div>
-<div class="ttc" id="ainfinite__maze_8h_html_a491c6a9998c9ce64d88b3a3a8a5c843d"><div class="ttname"><a href="infinite__maze_8h.html#a491c6a9998c9ce64d88b3a3a8a5c843d">infinite_maze_is_walkable</a></div><div class="ttdeci">API bool infinite_maze_is_walkable(void *maze_p, int wx, int wy)</div><div class="ttdoc">Test whether a world-space cell is walkable.</div></div>
-<div class="ttc" id="ainfinite__maze_8h_html_a55a7e853e09ab9461ae727fa64e567df"><div class="ttname"><a href="infinite__maze_8h.html#a55a7e853e09ab9461ae727fa64e567df">infinite_maze_walk_from_to</a></div><div class="ttdeci">API void infinite_maze_walk_from_to(void *maze_p, int fwx, int fwy, int twx, int twy, void(*walker)(int x, int y, void *user_data), void *user_data)</div><div class="ttdoc">Stream the unique shortest path between two world coordinates.</div></div>
-<div class="ttc" id="ainfinite__maze_8h_html_a6cf669e5737ee641aaa20bcedc022322"><div class="ttname"><a href="infinite__maze_8h.html#a6cf669e5737ee641aaa20bcedc022322">infinite_maze_free</a></div><div class="ttdeci">API void infinite_maze_free(void *m)</div><div class="ttdoc">Free an infinite maze and all generated chunks.</div></div>
-<div class="ttc" id="ainfinite__maze_8h_html_ac8b9f96bc4fcca3f0428dd31d5839b49"><div class="ttname"><a href="infinite__maze_8h.html#ac8b9f96bc4fcca3f0428dd31d5839b49">infinite_maze_get_cell</a></div><div class="ttdeci">API uint8_t infinite_maze_get_cell(void *maze_p, int wx, int wy)</div><div class="ttdoc">Retrieve hierarchical dead-end information for a world cell.</div></div>
-<div class="ttc" id="ainfinite__maze_8h_html_ade9c525b6f35e681bc679790d7ccbc71"><div class="ttname"><a href="infinite__maze_8h.html#ade9c525b6f35e681bc679790d7ccbc71">MAZE_RADIUS</a></div><div class="ttdeci">#define MAZE_RADIUS</div><div class="ttdef"><b>Definition</b> infinite_maze.h:74</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="infinite__maze_8h.html">infinite_maze.h</a></li>
+    <li class="navelem"><b>infinite_maze.h</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

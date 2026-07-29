@@ -216,3 +216,9 @@ int main(void) {
   return 0;
 }
 ```
+
+## Demo
+
+Try the interactive WebAssembly version:
+
+- [Browser Demo](demo/index.html)

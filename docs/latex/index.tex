@@ -1,0 +1,277 @@
+\chapter{Infinite Maze 🧩 }
+\hypertarget{index}{}\label{index}\index{Infinite Maze 🧩@{Infinite Maze 🧩}}
+\label{index_md_README}%
+\Hypertarget{index_md_README}%
+
+
+Single-\/header C library for infinite procedurally generated mazes ~\newline
+ Chunk-\/based, deterministic, recursive DFS.
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md3}{}\doxysection{\texorpdfstring{Features 🚀}{Features 🚀}}\label{index_autotoc_md3}
+This project implements an {\bfseries{infinite maze generator}} ♾️.
+
+The maze is {\bfseries{perfect}}:\+ ~\newline
+ for {\bfseries{any two points}} in the maze, there exists {\bfseries{one and only one path}} connecting them 🧵.\hypertarget{index_autotoc_md4}{}\doxysubsection{\texorpdfstring{Key properties}{Key properties}}\label{index_autotoc_md4}
+
+\begin{DoxyItemize}
+\item 🌐 Infinite, procedurally generated maze ~\newline
+
+\item 🛤️ {\bfseries{Unique path}} between any two positions ~\newline
+
+\item 📏 The connecting path is always {\bfseries{finite}}, even though the maze itself is infinite ~\newline
+
+\item 🌲 Structurally equivalent to an infinite spanning tree ~\newline
+
+\end{DoxyItemize}
+
+This guarantees {\bfseries{no loops}}, {\bfseries{no ambiguity}}, and deterministic navigation throughout the maze.
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md6}{}\doxysection{\texorpdfstring{Proof of Concept ⚠️}{Proof of Concept ⚠️}}\label{index_autotoc_md6}
+This project is a {\bfseries{proof of concept (PoC)}} 🧪.
+
+It demonstrates that the core idea {\bfseries{works correctly}}, but it is {\bfseries{not yet optimized}} 🚧. ~\newline
+ Performance, memory usage, and edge cases have {\bfseries{not}} been the main focus so far.\hypertarget{index_autotoc_md7}{}\doxysubsection{\texorpdfstring{What this means}{What this means}}\label{index_autotoc_md7}
+
+\begin{DoxyItemize}
+\item ✅ Correctness over performance ~\newline
+
+\item ❌ Not production-\/ready ~\newline
+
+\item 🔧 Further {\bfseries{optimizations and refactoring are required}}
+\end{DoxyItemize}\hypertarget{index_autotoc_md8}{}\doxysubsection{\texorpdfstring{Next steps}{Next steps}}\label{index_autotoc_md8}
+
+\begin{DoxyItemize}
+\item Improve algorithmic efficiency ⚡ ~\newline
+
+\item Reduce memory footprint 🧠 ~\newline
+
+\item Add benchmarks and profiling 📊 ~\newline
+
+\end{DoxyItemize}
+
+Contributions and optimization suggestions are {\bfseries{welcome}} 🙌
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md10}{}\doxysection{\texorpdfstring{Usage 🔧}{Usage 🔧}}\label{index_autotoc_md10}
+\hypertarget{index_autotoc_md11}{}\doxysubsection{\texorpdfstring{📚 API}{📚 API}}\label{index_autotoc_md11}
+\hypertarget{index_autotoc_md12}{}\doxysection{\texorpdfstring{🧩 Public API :\+}{🧩 Public API :\+}}\label{index_autotoc_md12}
+
+\begin{DoxyItemize}
+\item \#\#\# infinite\+\_\+maze\+\_\+new
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}*\ infinite\_maze\_new(\textcolor{keywordtype}{int}\ seed);}
+
+\end{DoxyCode}
+
+
+Create a new infinite procedurally generated maze.
+\begin{DoxyItemize}
+\item Allocates and initializes the root chunk.
+\item Maze generation is {\bfseries{deterministic}} with respect to {\ttfamily seed}.
+\item Additional chunks are generated {\bfseries{lazily}} on access.
+\end{DoxyItemize}
+
+{\bfseries{Parameters}}
+\begin{DoxyItemize}
+\item {\ttfamily seed} — Initial random seed controlling maze generation.
+\end{DoxyItemize}
+
+{\bfseries{Returns}}
+\begin{DoxyItemize}
+\item Opaque pointer to the maze instance.
+\item {\ttfamily NULL} on allocation failure.
+\end{DoxyItemize}
+
+{\bfseries{Complexity}}
+\begin{DoxyItemize}
+\item {\bfseries{O(1)}}
+\end{DoxyItemize}
+\item \#\#\# infinite\+\_\+maze\+\_\+free
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ infinite\_maze\_free(\textcolor{keywordtype}{void}*\ m);}
+
+\end{DoxyCode}
+
+
+Free an infinite procedurally generated maze.
+\begin{DoxyItemize}
+\item Recursively frees all generated chunks.
+\item Includes inner and outer mazes.
+\end{DoxyItemize}
+
+{\bfseries{Parameters}}
+\begin{DoxyItemize}
+\item {\ttfamily m} — Maze instance returned by {\ttfamily infinite\+\_\+maze\+\_\+new()}.
+\end{DoxyItemize}
+
+{\bfseries{Complexity}}
+\begin{DoxyItemize}
+\item {\bfseries{O(log(r))}}, where {\itshape r} is the distance from the origin to the farthest generated cell.
+\end{DoxyItemize}
+
+{\bfseries{Warning}}
+\begin{DoxyItemize}
+\item All pointers obtained from this maze become invalid.
+\end{DoxyItemize}
+\item \#\#\# infinite\+\_\+maze\+\_\+is\+\_\+walkable
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ infinite\_maze\_is\_walkable(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy);}
+
+\end{DoxyCode}
+
+
+Test whether a world-\/space cell is walkable.
+\begin{DoxyItemize}
+\item Returns whether the cell is an open passage or a wall.
+\item May trigger lazy chunk generation.
+\end{DoxyItemize}
+
+{\bfseries{Parameters}}
+\begin{DoxyItemize}
+\item {\ttfamily wx} — World X coordinate.
+\item {\ttfamily wy} — World Y coordinate.
+\item {\ttfamily maze\+\_\+p} — Maze instance.
+\end{DoxyItemize}
+
+{\bfseries{Returns}}
+\begin{DoxyItemize}
+\item {\ttfamily true} if walkable
+\item {\ttfamily false} otherwise
+\end{DoxyItemize}
+
+{\bfseries{Complexity}}
+\begin{DoxyItemize}
+\item Average:\+ {\bfseries{O(1)}}
+\item Worst case:\+ {\bfseries{O(log(wx² + wy²))}}
+\end{DoxyItemize}
+\item \#\#\# infinite\+\_\+maze\+\_\+get\+\_\+cell
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{uint8\_t\ infinite\_maze\_get\_cell(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy);}
+
+\end{DoxyCode}
+
+
+Retrieve hierarchical dead-\/end information for a world cell.
+
+Each bit of the returned byte encodes maze information:\+
+\begin{DoxyItemize}
+\item Bit 0 :\+ Walkability (1 = walkable, 0 = wall)
+\item Bit 1 :\+ Dead-\/end at local chunk level
+\item Bits 2–7 :\+ Dead-\/end status propagated through parent maze levels
+\end{DoxyItemize}
+
+{\bfseries{Parameters}}
+\begin{DoxyItemize}
+\item {\ttfamily wx} — World-\/space X coordinate.
+\item {\ttfamily wy} — World-\/space Y coordinate.
+\item {\ttfamily maze\+\_\+p} — Pointer to the root maze instance.
+\end{DoxyItemize}
+
+{\bfseries{Returns}}
+\begin{DoxyItemize}
+\item Encoded walkability and dead-\/end hierarchy information
+\item {\ttfamily 0} if {\ttfamily maze\+\_\+p} is NULL
+\end{DoxyItemize}
+
+{\bfseries{Complexity}}
+\begin{DoxyItemize}
+\item {\bfseries{O(log(\texorpdfstring{$\vert$}{|}wx\texorpdfstring{$\vert$}{|} + \texorpdfstring{$\vert$}{|}wy\texorpdfstring{$\vert$}{|}))}}
+\end{DoxyItemize}
+
+{\bfseries{Notes}}
+\begin{DoxyItemize}
+\item May trigger lazy generation of parent maze chunks. 
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{index_autotoc_md13}{}\doxysection{\texorpdfstring{-\/ See {\ttfamily infinite\+\_\+maze\+\_\+is\+\_\+walkable}}{-\/ See {\ttfamily infinite\+\_\+maze\+\_\+is\+\_\+walkable}}}\label{index_autotoc_md13}
+
+\begin{DoxyItemize}
+\item \#\#\# 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ infinite\_maze\_walk\_from\_to(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ fwx,\ \textcolor{keywordtype}{int}\ fwy,\ \textcolor{keywordtype}{int}\ twx,\ \textcolor{keywordtype}{int}\ twy,\ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ (*walker)(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{void}*\ user\_data),\ \textcolor{keywordtype}{void}*\ user\_data);}
+
+\end{DoxyCode}
+
+
+Stream the unique shortest path between two world coordinates.
+
+Computes and streams the deterministic shortest path between two world-\/space coordinates inside the given infinite maze.
+
+{\bfseries{Parameters}}
+\begin{DoxyItemize}
+\item {\ttfamily maze\+\_\+p} — Pointer to the root maze instance.
+\item {\ttfamily fwx} Starting world X coordinate.
+\item {\ttfamily fwy} Starting world Y coordinate.
+\item {\ttfamily twx} Target world X coordinate.
+\item {\ttfamily twy} Target world Y coordinate.
+\item {\ttfamily walker} Callback invoked for each world coordinate along the path.
+\item {\ttfamily user\+\_\+data} User-\/defined pointer passed unchanged to the callback.
+\end{DoxyItemize}
+
+{\bfseries{Complexity}}
+\begin{DoxyItemize}
+\item {\bfseries{O(\+L) = O(exp(d))}} where L is the number of world cells along the path. and d is the distance of the farthest point to the origine.
+\end{DoxyItemize}
+
+{\bfseries{Notes}}
+\begin{DoxyItemize}
+\item The path is streamed in traversal order from start to target.
+\item Concurrent calls must operate on distinct maze instances.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{index_autotoc_md14}{}\doxysubsection{\texorpdfstring{🧪 Example}{🧪 Example}}\label{index_autotoc_md14}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ MAZE\_RADIUS\ 2}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ INFINITE\_MAZE\_IMPLEMENTATION}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}infinite\_maze.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{enum}\ biom\_t\ \{}
+\DoxyCodeLine{\ \ WALKABLE\ \ =\ 0b001,}
+\DoxyCodeLine{\ \ DEAD\_END\ \ =\ 0b010,}
+\DoxyCodeLine{\ \ TINY\_ROOM\ =\ 0b100,}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ infinite\_maze\_print\_ascii(\textcolor{keywordtype}{void}*\ root,\ \textcolor{keywordtype}{int}\ W,\ \textcolor{keywordtype}{int}\ H)\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{int}\ minx\ =\ -\/W\ /\ 2,\ miny\ =\ -\/H\ /\ 2;}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ y\ =\ H\ -\/\ 1;\ y\ >=\ 0;\ y-\/-\/)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\ =\ 0;\ x\ <\ W;\ x++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordtype}{char}\ l\ =\ infinite\_maze\_get\_cell(minx\ +\ x,\ miny\ +\ y,\ root);}
+\DoxyCodeLine{\ \ \ \ \ \ putchar(l\ \&\ WALKABLE\ ?\ (l\ \&\ DEAD\_END\ ?\ \textcolor{charliteral}{'*'}\ :\ \textcolor{charliteral}{'\ '})\ :\ 219);}
+\DoxyCodeLine{\ \ \ \ \ \ putchar(l\ \&\ WALKABLE\ ?\ (l\ \&\ TINY\_ROOM\ ?\ \textcolor{charliteral}{'/'}\ :\ \textcolor{charliteral}{'\ '})\ :\ 219);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ putchar(\textcolor{charliteral}{'\(\backslash\)n'});}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ putchar(\textcolor{charliteral}{'\(\backslash\)n'});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{void}*\ root\ =\ infinite\_maze\_new(0xC0FFEE);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ infinite\_maze\_print\_ascii(root,\ 64,\ 64);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ infinite\_maze\_free(root);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md15}{}\doxysection{\texorpdfstring{Demo}{Demo}}\label{index_autotoc_md15}
+Try the interactive Web\+Assembly version:\+
+
+
+\begin{DoxyItemize}
+\item \href{demo/index.html}{\texttt{Browser Demo}} 
+\end{DoxyItemize}

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['layout_20of_20the_20returned_20byte_0',['Bit layout of the returned byte',['../infinite__maze_8h.html#autotoc_md0',1,'']]]
+  ['api_0',['📚 API',['../index.html#autotoc_md11',1,'']]],
+  ['api_20_3a_1',['🧩 Public API :',['../index.html#autotoc_md12',1,'']]]
 ];

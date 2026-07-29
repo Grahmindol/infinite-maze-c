@@ -1,5 +1,5 @@
 \doxysection{infinite\+\_\+maze.\+h}
-\hypertarget{infinite__maze_8h_source}{}\label{infinite__maze_8h_source}\doxymbox{\hyperlink{infinite__maze_8h}{Go to the documentation of this file.}}
+\hypertarget{infinite__maze_8h_source}{}\label{infinite__maze_8h_source}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ INFINITE\_MAZE\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ INFINITE\_MAZE\_H}}
@@ -93,19 +93,19 @@
 \DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ =======\ API\ ===========}}
 \DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ =======================\ */}}
 \DoxyCodeLine{00092\ }
-\DoxyCodeLine{00106\ API\ \textcolor{keywordtype}{void}*\ \doxymbox{\hyperlink{infinite__maze_8h_a48ea5e5d695df756191458a93c543137}{infinite\_maze\_new}}(\textcolor{keywordtype}{int}\ seed);}
+\DoxyCodeLine{00106\ API\ \textcolor{keywordtype}{void}*\ infinite\_maze\_new(\textcolor{keywordtype}{int}\ seed);}
 \DoxyCodeLine{00107\ }
-\DoxyCodeLine{00122\ API\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{infinite__maze_8h_a6cf669e5737ee641aaa20bcedc022322}{infinite\_maze\_free}}(\textcolor{keywordtype}{void}*\ m);}
+\DoxyCodeLine{00122\ API\ \textcolor{keywordtype}{void}\ infinite\_maze\_free(\textcolor{keywordtype}{void}*\ m);}
 \DoxyCodeLine{00123\ }
-\DoxyCodeLine{00144\ API\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{infinite__maze_8h_a491c6a9998c9ce64d88b3a3a8a5c843d}{infinite\_maze\_is\_walkable}}(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy);}
+\DoxyCodeLine{00144\ API\ \textcolor{keywordtype}{bool}\ infinite\_maze\_is\_walkable(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy);}
 \DoxyCodeLine{00145\ }
-\DoxyCodeLine{00179\ API\ uint8\_t\ \doxymbox{\hyperlink{infinite__maze_8h_ac8b9f96bc4fcca3f0428dd31d5839b49}{infinite\_maze\_get\_cell}}(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy);}
+\DoxyCodeLine{00179\ API\ uint8\_t\ infinite\_maze\_get\_cell(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy);}
 \DoxyCodeLine{00180\ }
-\DoxyCodeLine{00210\ API\ uint8\_t\ \doxymbox{\hyperlink{infinite__maze_8h_a2286ca1218ab4743745f80c48e04d1b8}{infinite\_maze\_get\_fixedness}}(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy);}
+\DoxyCodeLine{00210\ API\ uint8\_t\ infinite\_maze\_get\_fixedness(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy);}
 \DoxyCodeLine{00211\ }
-\DoxyCodeLine{00231\ API\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{infinite__maze_8h_a10f439f3c521c35020e0420756c6c7fd}{infinite\_maze\_get\_region\_center}}(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy,\ \textcolor{keywordtype}{int}\ level,\ \textcolor{keywordtype}{int}*\ cx,\ \textcolor{keywordtype}{int}*\ cy);}
+\DoxyCodeLine{00231\ API\ \textcolor{keywordtype}{void}\ infinite\_maze\_get\_region\_center(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy,\ \textcolor{keywordtype}{int}\ level,\ \textcolor{keywordtype}{int}*\ cx,\ \textcolor{keywordtype}{int}*\ cy);}
 \DoxyCodeLine{00232\ }
-\DoxyCodeLine{00259\ API\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{infinite__maze_8h_a55a7e853e09ab9461ae727fa64e567df}{infinite\_maze\_walk\_from\_to}}(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ fwx,\ \textcolor{keywordtype}{int}\ fwy,\ \textcolor{keywordtype}{int}\ twx,\ \textcolor{keywordtype}{int}\ twy,}
+\DoxyCodeLine{00259\ API\ \textcolor{keywordtype}{void}\ infinite\_maze\_walk\_from\_to(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ fwx,\ \textcolor{keywordtype}{int}\ fwy,\ \textcolor{keywordtype}{int}\ twx,\ \textcolor{keywordtype}{int}\ twy,}
 \DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ (*walker)(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{void}*\ user\_data),\ \textcolor{keywordtype}{void}*\ user\_data);}
 \DoxyCodeLine{00261\ \textcolor{comment}{/*\ =======================}}
 \DoxyCodeLine{00262\ \textcolor{comment}{\ \ \ ===\ IMPLEMENTATION\ ====}}
@@ -147,9 +147,9 @@
 \DoxyCodeLine{00299\ }
 \DoxyCodeLine{00300\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ node\_t*\ \_node(maze\_t*\ m,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y)\ \{}
 \DoxyCodeLine{00301\ \ \ \textcolor{keywordflow}{if}\ (!m)\ \textcolor{keywordflow}{return}\ NULL;}
-\DoxyCodeLine{00302\ \ \ \textcolor{keywordtype}{int}\ size\ =\ 2\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ +\ 1;}
-\DoxyCodeLine{00303\ \ \ \textcolor{keywordtype}{int}\ ix\ =\ x\ +\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}};}
-\DoxyCodeLine{00304\ \ \ \textcolor{keywordtype}{int}\ iy\ =\ y\ +\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}};}
+\DoxyCodeLine{00302\ \ \ \textcolor{keywordtype}{int}\ size\ =\ 2\ *\ MAZE\_RADIUS\ +\ 1;}
+\DoxyCodeLine{00303\ \ \ \textcolor{keywordtype}{int}\ ix\ =\ x\ +\ MAZE\_RADIUS;}
+\DoxyCodeLine{00304\ \ \ \textcolor{keywordtype}{int}\ iy\ =\ y\ +\ MAZE\_RADIUS;}
 \DoxyCodeLine{00305\ \ \ \textcolor{keywordflow}{if}\ (ix\ <\ 0\ ||\ ix\ >=\ size\ ||\ iy\ <\ 0\ ||\ iy\ >=\ size)\ \textcolor{keywordflow}{return}\ NULL;}
 \DoxyCodeLine{00306\ \ \ \textcolor{keywordflow}{return}\ \&m-\/>data[iy\ *\ size\ +\ ix];}
 \DoxyCodeLine{00307\ \}}
@@ -183,12 +183,12 @@
 \DoxyCodeLine{00335\ \}}
 \DoxyCodeLine{00336\ }
 \DoxyCodeLine{00337\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \_world\_to\_chunk(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ wy,\ \textcolor{keywordtype}{int}*\ cx,\ \textcolor{keywordtype}{int}*\ cy,\ \textcolor{keywordtype}{int}*\ lx,\ \textcolor{keywordtype}{int}*\ ly)\ \{}
-\DoxyCodeLine{00338\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ size\ =\ 2\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ +\ 1;}
+\DoxyCodeLine{00338\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ size\ =\ 2\ *\ MAZE\_RADIUS\ +\ 1;}
 \DoxyCodeLine{00339\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ sx\ =\ (wx\ >\ 0)\ -\/\ (wx\ <\ 0);}
 \DoxyCodeLine{00340\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ sy\ =\ (wy\ >\ 0)\ -\/\ (wy\ <\ 0);}
 \DoxyCodeLine{00341\ }
-\DoxyCodeLine{00342\ \ \ *cx\ =\ (wx\ +\ sx\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}})\ /\ size;}
-\DoxyCodeLine{00343\ \ \ *cy\ =\ (wy\ +\ sy\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}})\ /\ size;}
+\DoxyCodeLine{00342\ \ \ *cx\ =\ (wx\ +\ sx\ *\ MAZE\_RADIUS)\ /\ size;}
+\DoxyCodeLine{00343\ \ \ *cy\ =\ (wy\ +\ sy\ *\ MAZE\_RADIUS)\ /\ size;}
 \DoxyCodeLine{00344\ \ \ *lx\ =\ wx\ -\/\ (*cx)\ *\ size;}
 \DoxyCodeLine{00345\ \ \ *ly\ =\ wy\ -\/\ (*cy)\ *\ size;}
 \DoxyCodeLine{00346\ \}}
@@ -207,8 +207,8 @@
 \DoxyCodeLine{00359\ \ \ \textcolor{keywordflow}{if}\ (!m\ ||\ !m-\/>outer\_node)\ \textcolor{keywordflow}{return};}
 \DoxyCodeLine{00360\ }
 \DoxyCodeLine{00361\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d\ =\ 0;\ d\ <\ DIR\_COUNT;\ d++)\ \{}
-\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keywordtype}{int}\ dx\ =\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ *\ DIR\_DX[d];}
-\DoxyCodeLine{00363\ \ \ \ \ \textcolor{keywordtype}{int}\ dy\ =\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ *\ DIR\_DY[d];}
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keywordtype}{int}\ dx\ =\ MAZE\_RADIUS\ *\ DIR\_DX[d];}
+\DoxyCodeLine{00363\ \ \ \ \ \textcolor{keywordtype}{int}\ dy\ =\ MAZE\_RADIUS\ *\ DIR\_DY[d];}
 \DoxyCodeLine{00364\ \ \ \ \ node\_t*\ n\ =\ \_node(m,\ dx,\ dy);}
 \DoxyCodeLine{00365\ \ \ \ \ \textcolor{keywordflow}{if}\ ((n-\/>is\_open[d]\ =\ m-\/>outer\_node-\/>is\_open[d]))\ \_fix\_parent\_path(m,\ dx,\ dy);}
 \DoxyCodeLine{00366\ }
@@ -217,13 +217,13 @@
 \DoxyCodeLine{00369\ \}}
 \DoxyCodeLine{00370\ }
 \DoxyCodeLine{00372\ \textcolor{keyword}{static}\ node\_t*\ \_get\_raw\_cell(\textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy,\ maze\_t*\ root)\ \{}
-\DoxyCodeLine{00373\ \ \ \textcolor{keywordflow}{if}\ (abs(wx)\ <=\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ \&\&\ abs(wy)\ <=\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}})\ \textcolor{keywordflow}{return}\ \_node(root,\ wx,\ wy);}
+\DoxyCodeLine{00373\ \ \ \textcolor{keywordflow}{if}\ (abs(wx)\ <=\ MAZE\_RADIUS\ \&\&\ abs(wy)\ <=\ MAZE\_RADIUS)\ \textcolor{keywordflow}{return}\ \_node(root,\ wx,\ wy);}
 \DoxyCodeLine{00374\ }
 \DoxyCodeLine{00375\ \ \ \textcolor{keywordtype}{int}\ cx,\ cy,\ lx,\ ly;}
 \DoxyCodeLine{00376\ \ \ \_world\_to\_chunk(wx,\ wy,\ \&cx,\ \&cy,\ \&lx,\ \&ly);}
 \DoxyCodeLine{00377\ }
 \DoxyCodeLine{00378\ \ \ \textcolor{keywordflow}{if}\ (!root-\/>outer\_node)\ \{}
-\DoxyCodeLine{00379\ \ \ \ \ maze\_t*\ outer\_maze\ =\ (maze\_t*)\doxymbox{\hyperlink{infinite__maze_8h_a48ea5e5d695df756191458a93c543137}{infinite\_maze\_new}}(root-\/>seed\ +\ 1);}
+\DoxyCodeLine{00379\ \ \ \ \ maze\_t*\ outer\_maze\ =\ (maze\_t*)infinite\_maze\_new(root-\/>seed\ +\ 1);}
 \DoxyCodeLine{00380\ \ \ \ \ root-\/>outer\_node\ =\ \_node(outer\_maze,\ 0,\ 0);}
 \DoxyCodeLine{00381\ \ \ \ \ root-\/>outer\_node-\/>inner\_maze\ =\ root;}
 \DoxyCodeLine{00382\ \ \ \ \ \_update\_chunk\_aperture(root);}
@@ -234,7 +234,7 @@
 \DoxyCodeLine{00387\ }
 \DoxyCodeLine{00388\ \ \ \textcolor{keywordflow}{if}\ (!outer\_node-\/>inner\_maze)\ \{}
 \DoxyCodeLine{00389\ \ \ \ \ outer\_node-\/>inner\_maze\ =}
-\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ (maze\_t*)\doxymbox{\hyperlink{infinite__maze_8h_a48ea5e5d695df756191458a93c543137}{infinite\_maze\_new}}(outer\_maze-\/>seed\ \string^\ (\textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long})(cx)\ *\ 0x9E3779B185EBCA87ULL\ \string^}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ (maze\_t*)infinite\_maze\_new(outer\_maze-\/>seed\ \string^\ (\textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long})(cx)\ *\ 0x9E3779B185EBCA87ULL\ \string^}
 \DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long})(cy)\ *\ 0xC2B2AE3D27D4EB4FULL);}
 \DoxyCodeLine{00392\ \ \ \ \ outer\_node-\/>inner\_maze-\/>outer\_node\ =\ outer\_node;}
 \DoxyCodeLine{00393\ \ \ \ \ \_update\_chunk\_aperture(outer\_node-\/>inner\_maze);}
@@ -250,12 +250,12 @@
 \DoxyCodeLine{00403\ \ \ \textcolor{keywordtype}{int}\ cx,\ cy,\ lx,\ ly;}
 \DoxyCodeLine{00404\ \ \ \_world\_to\_chunk(wx,\ wy,\ \&cx,\ \&cy,\ \&lx,\ \&ly);}
 \DoxyCodeLine{00405\ }
-\DoxyCodeLine{00406\ \ \ \textcolor{keywordflow}{if}\ ((abs(lx)\ !=\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ \&\&\ abs(ly)\ !=\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}))\ \textcolor{keywordflow}{return}\ base\_node;}
+\DoxyCodeLine{00406\ \ \ \textcolor{keywordflow}{if}\ ((abs(lx)\ !=\ MAZE\_RADIUS\ \&\&\ abs(ly)\ !=\ MAZE\_RADIUS))\ \textcolor{keywordflow}{return}\ base\_node;}
 \DoxyCodeLine{00407\ }
 \DoxyCodeLine{00408\ \ \ uint64\_t\ s\ =}
 \DoxyCodeLine{00409\ \ \ \ \ \ \ (base\_node-\/>outer\_maze-\/>seed\ \string^\ (lx)\ *\ 0x9E3779B185EBCA87ULL\ \string^\ (ly)\ *\ 0xC2B2AE3D27D4EB4FULL);}
 \DoxyCodeLine{00410\ }
-\DoxyCodeLine{00411\ \ \ \textcolor{keywordflow}{if}\ (lx\ ==\ -\/\doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ \&\&\ ly\ !=\ 0\ \&\&\ rng(\&s)\ \&\ 0b11)\ \{}
+\DoxyCodeLine{00411\ \ \ \textcolor{keywordflow}{if}\ (lx\ ==\ -\/MAZE\_RADIUS\ \&\&\ ly\ !=\ 0\ \&\&\ rng(\&s)\ \&\ 0b11)\ \{}
 \DoxyCodeLine{00412\ \ \ \ \ base\_node-\/>is\_open[DIR\_W]\ =\ 1;}
 \DoxyCodeLine{00413\ \ \ \ \ \_get\_raw\_cell(wx\ -\/\ 1,\ wy,\ root)-\/>is\_open[DIR\_E]\ =\ 1;}
 \DoxyCodeLine{00414\ }
@@ -265,7 +265,7 @@
 \DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ -\/>is\_open[DIR\_OPP[base\_node-\/>parent\_direction]]\ =\ 0;}
 \DoxyCodeLine{00419\ }
 \DoxyCodeLine{00420\ \ \ \ \ base\_node-\/>parent\_direction\ =\ DIR\_W;}
-\DoxyCodeLine{00421\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (ly\ ==\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ \&\&\ lx\ !=\ 0\ \&\&\ rng(\&s)\ \&\ 0b11)\ \{}
+\DoxyCodeLine{00421\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (ly\ ==\ MAZE\_RADIUS\ \&\&\ lx\ !=\ 0\ \&\&\ rng(\&s)\ \&\ 0b11)\ \{}
 \DoxyCodeLine{00422\ \ \ \ \ base\_node-\/>is\_open[DIR\_N]\ =\ 1;}
 \DoxyCodeLine{00423\ \ \ \ \ \_get\_raw\_cell(wx,\ wy\ +\ 1,\ root)-\/>is\_open[DIR\_S]\ =\ 1;}
 \DoxyCodeLine{00424\ }
@@ -281,8 +281,8 @@
 \DoxyCodeLine{00434\ \ \ \textcolor{keywordflow}{return}\ base\_node;}
 \DoxyCodeLine{00435\ \}}
 \DoxyCodeLine{00436\ }
-\DoxyCodeLine{00437\ API\ \textcolor{keywordtype}{void}*\ \doxymbox{\hyperlink{infinite__maze_8h_a48ea5e5d695df756191458a93c543137}{infinite\_maze\_new}}(\textcolor{keywordtype}{int}\ seed)\ \{}
-\DoxyCodeLine{00438\ \ \ \textcolor{keywordtype}{int}\ size\ =\ 2\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ +\ 1;}
+\DoxyCodeLine{00437\ API\ \textcolor{keywordtype}{void}*\ infinite\_maze\_new(\textcolor{keywordtype}{int}\ seed)\ \{}
+\DoxyCodeLine{00438\ \ \ \textcolor{keywordtype}{int}\ size\ =\ 2\ *\ MAZE\_RADIUS\ +\ 1;}
 \DoxyCodeLine{00439\ \ \ maze\_t*\ m\ =\ calloc(1,\ \textcolor{keyword}{sizeof}(*m));}
 \DoxyCodeLine{00440\ \ \ m-\/>seed\ =\ seed;}
 \DoxyCodeLine{00441\ \ \ m-\/>data\ =\ calloc(size\ *\ size,\ \textcolor{keyword}{sizeof}(node\_t));}
@@ -291,21 +291,21 @@
 \DoxyCodeLine{00444\ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{void}*)m;}
 \DoxyCodeLine{00445\ \}}
 \DoxyCodeLine{00446\ }
-\DoxyCodeLine{00447\ API\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{infinite__maze_8h_a6cf669e5737ee641aaa20bcedc022322}{infinite\_maze\_free}}(\textcolor{keywordtype}{void}*\ maze\_p)\ \{}
+\DoxyCodeLine{00447\ API\ \textcolor{keywordtype}{void}\ infinite\_maze\_free(\textcolor{keywordtype}{void}*\ maze\_p)\ \{}
 \DoxyCodeLine{00448\ \ \ \textcolor{keywordflow}{if}\ (!maze\_p)\ \textcolor{keywordflow}{return};}
 \DoxyCodeLine{00449\ \ \ maze\_t*\ m\ =\ (maze\_t*)maze\_p;}
 \DoxyCodeLine{00450\ }
 \DoxyCodeLine{00451\ \ \ \textcolor{keywordflow}{if}\ (m-\/>outer\_node)\ \{}
-\DoxyCodeLine{00452\ \ \ \ \ \doxymbox{\hyperlink{infinite__maze_8h_a6cf669e5737ee641aaa20bcedc022322}{infinite\_maze\_free}}(m-\/>outer\_node-\/>outer\_maze);}
+\DoxyCodeLine{00452\ \ \ \ \ infinite\_maze\_free(m-\/>outer\_node-\/>outer\_maze);}
 \DoxyCodeLine{00453\ \ \ \ \ \textcolor{keywordflow}{return};}
 \DoxyCodeLine{00454\ \ \ \}}
 \DoxyCodeLine{00455\ }
-\DoxyCodeLine{00456\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ y\ =\ -\/\doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}};\ y\ <=\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}};\ y++)\ \{}
-\DoxyCodeLine{00457\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\ =\ -\/\doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}};\ x\ <=\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}};\ x++)\ \{}
+\DoxyCodeLine{00456\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ y\ =\ -\/MAZE\_RADIUS;\ y\ <=\ MAZE\_RADIUS;\ y++)\ \{}
+\DoxyCodeLine{00457\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\ =\ -\/MAZE\_RADIUS;\ x\ <=\ MAZE\_RADIUS;\ x++)\ \{}
 \DoxyCodeLine{00458\ \ \ \ \ \ \ node\_t*\ n\ =\ \_node(m,\ x,\ y);}
 \DoxyCodeLine{00459\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n-\/>inner\_maze)\ \{}
 \DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ n-\/>inner\_maze-\/>outer\_node\ =\ NULL;}
-\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{infinite__maze_8h_a6cf669e5737ee641aaa20bcedc022322}{infinite\_maze\_free}}(n-\/>inner\_maze);}
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ infinite\_maze\_free(n-\/>inner\_maze);}
 \DoxyCodeLine{00462\ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00463\ \ \ \ \ \}}
 \DoxyCodeLine{00464\ \ \ \}}
@@ -314,7 +314,7 @@
 \DoxyCodeLine{00467\ \ \ free(m);}
 \DoxyCodeLine{00468\ \}}
 \DoxyCodeLine{00469\ }
-\DoxyCodeLine{00470\ API\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{infinite__maze_8h_a491c6a9998c9ce64d88b3a3a8a5c843d}{infinite\_maze\_is\_walkable}}(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy)\ \{}
+\DoxyCodeLine{00470\ API\ \textcolor{keywordtype}{bool}\ infinite\_maze\_is\_walkable(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy)\ \{}
 \DoxyCodeLine{00471\ \ \ \textcolor{keywordflow}{if}\ (!maze\_p)\ \textcolor{keywordflow}{return}\ 0;}
 \DoxyCodeLine{00472\ \ \ \textcolor{keywordflow}{if}\ ((wx\ \string^\ wy)\ \&\ 1)\ \textcolor{keywordflow}{return}\ wx\ \&\ 1;}
 \DoxyCodeLine{00473\ }
@@ -329,13 +329,13 @@
 \DoxyCodeLine{00482\ \ \ \textcolor{keywordflow}{return}\ \_get\_refined\_cell(x,\ y,\ root)-\/>is\_open[!(wx\ \&\ 1)];}
 \DoxyCodeLine{00483\ \}}
 \DoxyCodeLine{00484\ }
-\DoxyCodeLine{00485\ API\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{infinite__maze_8h_a10f439f3c521c35020e0420756c6c7fd}{infinite\_maze\_get\_region\_center}}(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy,\ \textcolor{keywordtype}{int}\ level,\ \textcolor{keywordtype}{int}*\ cx,\ \textcolor{keywordtype}{int}*\ cy)\ \{}
+\DoxyCodeLine{00485\ API\ \textcolor{keywordtype}{void}\ infinite\_maze\_get\_region\_center(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy,\ \textcolor{keywordtype}{int}\ level,\ \textcolor{keywordtype}{int}*\ cx,\ \textcolor{keywordtype}{int}*\ cy)\ \{}
 \DoxyCodeLine{00486\ \ \ *cx\ =\ wx;}
 \DoxyCodeLine{00487\ \ \ *cy\ =\ wy;}
 \DoxyCodeLine{00488\ }
 \DoxyCodeLine{00489\ \ \ \textcolor{keywordflow}{if}\ (level\ <=\ 0)\ \textcolor{keywordflow}{return};}
 \DoxyCodeLine{00490\ }
-\DoxyCodeLine{00491\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ size\ =\ 2\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ +\ 1;}
+\DoxyCodeLine{00491\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ size\ =\ 2\ *\ MAZE\_RADIUS\ +\ 1;}
 \DoxyCodeLine{00492\ }
 \DoxyCodeLine{00493\ \ \ *cx\ >>=\ 1;}
 \DoxyCodeLine{00494\ \ \ *cy\ >>=\ 1;}
@@ -358,8 +358,8 @@
 \DoxyCodeLine{00511\ \ \ \ \ \textcolor{keywordtype}{int}\ sx\ =\ (*cx\ >\ 0)\ -\/\ (*cx\ <\ 0);}
 \DoxyCodeLine{00512\ \ \ \ \ \textcolor{keywordtype}{int}\ sy\ =\ (*cy\ >\ 0)\ -\/\ (*cy\ <\ 0);}
 \DoxyCodeLine{00513\ }
-\DoxyCodeLine{00514\ \ \ \ \ *cx\ =\ (*cx\ +\ sx\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}})\ /\ size;}
-\DoxyCodeLine{00515\ \ \ \ \ *cy\ =\ (*cy\ +\ sy\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}})\ /\ size;}
+\DoxyCodeLine{00514\ \ \ \ \ *cx\ =\ (*cx\ +\ sx\ *\ MAZE\_RADIUS)\ /\ size;}
+\DoxyCodeLine{00515\ \ \ \ \ *cy\ =\ (*cy\ +\ sy\ *\ MAZE\_RADIUS)\ /\ size;}
 \DoxyCodeLine{00516\ \ \ \}}
 \DoxyCodeLine{00517\ }
 \DoxyCodeLine{00518\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ level;\ ++i)\ \{}
@@ -376,17 +376,17 @@
 \DoxyCodeLine{00529\ \textcolor{keyword}{static}\ uint8\_t\ \_get\_cell\_impl(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy,\ node\_predicate\_t\ predicate)\ \{}
 \DoxyCodeLine{00530\ \ \ \textcolor{keywordflow}{if}\ (!maze\_p)\ \textcolor{keywordflow}{return}\ 0;}
 \DoxyCodeLine{00531\ \ \ maze\_t*\ root\ =\ maze\_p;}
-\DoxyCodeLine{00532\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ size\ =\ 2\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ +\ 1;}
+\DoxyCodeLine{00532\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ size\ =\ 2\ *\ MAZE\_RADIUS\ +\ 1;}
 \DoxyCodeLine{00533\ }
 \DoxyCodeLine{00534\ \ \ node\_t*\ n\ =\ \_get\_raw\_cell(wx\ >>\ 1,\ wy\ >>\ 1,\ root);}
-\DoxyCodeLine{00535\ \ \ uint8\_t\ res\ =\ \doxymbox{\hyperlink{infinite__maze_8h_a491c6a9998c9ce64d88b3a3a8a5c843d}{infinite\_maze\_is\_walkable}}(maze\_p,\ wx,\ wy);}
+\DoxyCodeLine{00535\ \ \ uint8\_t\ res\ =\ infinite\_maze\_is\_walkable(maze\_p,\ wx,\ wy);}
 \DoxyCodeLine{00536\ \ \ \textcolor{keywordflow}{if}\ (wy\ \&\ 1\ ||\ \string~wx\ \&\ 1)\ \{}
 \DoxyCodeLine{00537\ \ \ \ \ \textcolor{keywordtype}{int}\ xa,\ ya,\ xb,\ yb;}
 \DoxyCodeLine{00538\ \ \ \ \ \textcolor{keywordflow}{if}\ (wy\ \&\ 1)\ \{}
 \DoxyCodeLine{00539\ \ \ \ \ \ \ uint8\_t\ neib\ =\ \_get\_cell\_impl(maze\_p,\ wx,\ wy\ -\/\ 1,\ predicate);}
 \DoxyCodeLine{00540\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 2;\ i\ <\ 8;\ i++)\ \{}
-\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{infinite__maze_8h_a10f439f3c521c35020e0420756c6c7fd}{infinite\_maze\_get\_region\_center}}(maze\_p,\ wx,\ wy\ +\ 1,\ i,\ \&xa,\ \&ya);}
-\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{infinite__maze_8h_a10f439f3c521c35020e0420756c6c7fd}{infinite\_maze\_get\_region\_center}}(maze\_p,\ wx,\ wy\ -\/\ 1,\ i,\ \&xb,\ \&yb);}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ infinite\_maze\_get\_region\_center(maze\_p,\ wx,\ wy\ +\ 1,\ i,\ \&xa,\ \&ya);}
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ infinite\_maze\_get\_region\_center(maze\_p,\ wx,\ wy\ -\/\ 1,\ i,\ \&xb,\ \&yb);}
 \DoxyCodeLine{00543\ }
 \DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (xa\ ==\ xb\ \&\&\ ya\ ==\ yb)\ \{}
 \DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \ \ res\ |=\ neib\ \&\ (1\ <<\ i);}
@@ -398,8 +398,8 @@
 \DoxyCodeLine{00551\ \ \ \ \ \textcolor{keywordflow}{if}\ (\string~wx\ \&\ 1)\ \{}
 \DoxyCodeLine{00552\ \ \ \ \ \ \ uint8\_t\ neib\ =\ \_get\_cell\_impl(maze\_p,\ wx\ +\ 1,\ wy,\ predicate);}
 \DoxyCodeLine{00553\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 2;\ i\ <\ 8;\ i++)\ \{}
-\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{infinite__maze_8h_a10f439f3c521c35020e0420756c6c7fd}{infinite\_maze\_get\_region\_center}}(maze\_p,\ wx\ +\ 1,\ wy,\ i,\ \&xa,\ \&ya);}
-\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{infinite__maze_8h_a10f439f3c521c35020e0420756c6c7fd}{infinite\_maze\_get\_region\_center}}(maze\_p,\ wx\ -\/\ 1,\ wy,\ i,\ \&xb,\ \&yb);}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ infinite\_maze\_get\_region\_center(maze\_p,\ wx\ +\ 1,\ wy,\ i,\ \&xa,\ \&ya);}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ infinite\_maze\_get\_region\_center(maze\_p,\ wx\ -\/\ 1,\ wy,\ i,\ \&xb,\ \&yb);}
 \DoxyCodeLine{00556\ }
 \DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (xa\ ==\ xb\ \&\&\ ya\ ==\ yb)\ \{}
 \DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \ \ res\ |=\ neib\ \&\ (1\ <<\ i);}
@@ -411,12 +411,12 @@
 \DoxyCodeLine{00564\ \ \ \ \ \textcolor{keywordflow}{if}\ (\string~wx\ \&\ 1\ \&\&\ wy\ \&\ 1)\ \{}
 \DoxyCodeLine{00565\ \ \ \ \ \ \ uint8\_t\ neib\ =\ \_get\_cell\_impl(maze\_p,\ wx\ +\ 1,\ wy\ -\/\ 1,\ predicate);}
 \DoxyCodeLine{00566\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 2;\ i\ <\ 8;\ i++)\ \{}
-\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{infinite__maze_8h_a10f439f3c521c35020e0420756c6c7fd}{infinite\_maze\_get\_region\_center}}(maze\_p,\ wx\ +\ 1,\ wy\ -\/\ 1,\ i,\ \&xa,\ \&ya);}
-\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{infinite__maze_8h_a10f439f3c521c35020e0420756c6c7fd}{infinite\_maze\_get\_region\_center}}(maze\_p,\ wx\ -\/\ 1,\ wy\ +\ 1,\ i,\ \&xb,\ \&yb);}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ infinite\_maze\_get\_region\_center(maze\_p,\ wx\ +\ 1,\ wy\ -\/\ 1,\ i,\ \&xa,\ \&ya);}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ infinite\_maze\_get\_region\_center(maze\_p,\ wx\ -\/\ 1,\ wy\ +\ 1,\ i,\ \&xb,\ \&yb);}
 \DoxyCodeLine{00569\ }
 \DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (xa\ ==\ xb\ \&\&\ ya\ ==\ yb)\ \{}
-\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{infinite__maze_8h_a10f439f3c521c35020e0420756c6c7fd}{infinite\_maze\_get\_region\_center}}(maze\_p,\ wx\ -\/\ 1,\ wy\ -\/\ 1,\ i,\ \&xa,\ \&ya);}
-\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{infinite__maze_8h_a10f439f3c521c35020e0420756c6c7fd}{infinite\_maze\_get\_region\_center}}(maze\_p,\ wx\ +\ 1,\ wy\ +\ 1,\ i,\ \&xb,\ \&yb);}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ infinite\_maze\_get\_region\_center(maze\_p,\ wx\ -\/\ 1,\ wy\ -\/\ 1,\ i,\ \&xa,\ \&ya);}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \ \ infinite\_maze\_get\_region\_center(maze\_p,\ wx\ +\ 1,\ wy\ +\ 1,\ i,\ \&xb,\ \&yb);}
 \DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (xa\ ==\ xb\ \&\&\ ya\ ==\ yb)\ \{}
 \DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \ \ \ \ res\ |=\ neib\ \&\ (1\ <<\ i);}
 \DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
@@ -431,16 +431,16 @@
 \DoxyCodeLine{00584\ \ \ \}}
 \DoxyCodeLine{00585\ }
 \DoxyCodeLine{00586\ \ \ res\ |=\ predicate(n)\ <<\ 1;}
-\DoxyCodeLine{00587\ \ \ \doxymbox{\hyperlink{infinite__maze_8h_a10f439f3c521c35020e0420756c6c7fd}{infinite\_maze\_get\_region\_center}}(maze\_p,\ wx,\ wy,\ 2,\ \&wx,\ \&wy);}
+\DoxyCodeLine{00587\ \ \ infinite\_maze\_get\_region\_center(maze\_p,\ wx,\ wy,\ 2,\ \&wx,\ \&wy);}
 \DoxyCodeLine{00588\ \ \ \textcolor{keywordtype}{int}\ x\ =\ wx\ >>\ 1,\ y\ =\ wy\ >>\ 1;}
 \DoxyCodeLine{00589\ }
 \DoxyCodeLine{00590\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 2;\ i\ <\ 8;\ i++)\ \{}
-\DoxyCodeLine{00591\ \ \ \ \ \textcolor{keywordflow}{if}\ (!root-\/>outer\_node)\ \_get\_raw\_cell(x,\ y\ +\ (2\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ +\ 1),\ root);}
+\DoxyCodeLine{00591\ \ \ \ \ \textcolor{keywordflow}{if}\ (!root-\/>outer\_node)\ \_get\_raw\_cell(x,\ y\ +\ (2\ *\ MAZE\_RADIUS\ +\ 1),\ root);}
 \DoxyCodeLine{00592\ \ \ \ \ root\ =\ root-\/>outer\_node-\/>outer\_maze;}
 \DoxyCodeLine{00593\ }
 \DoxyCodeLine{00594\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ sx\ =\ (x\ >\ 0)\ -\/\ (x\ <\ 0),\ sy\ =\ (y\ >\ 0)\ -\/\ (y\ <\ 0);}
-\DoxyCodeLine{00595\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ cx\ =\ (x\ +\ sx\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}})\ /\ size;}
-\DoxyCodeLine{00596\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ cy\ =\ (y\ +\ sy\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}})\ /\ size;}
+\DoxyCodeLine{00595\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ cx\ =\ (x\ +\ sx\ *\ MAZE\_RADIUS)\ /\ size;}
+\DoxyCodeLine{00596\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ cy\ =\ (y\ +\ sy\ *\ MAZE\_RADIUS)\ /\ size;}
 \DoxyCodeLine{00597\ }
 \DoxyCodeLine{00598\ \ \ \ \ x\ =\ cx;}
 \DoxyCodeLine{00599\ \ \ \ \ y\ =\ cy;}
@@ -455,13 +455,13 @@
 \DoxyCodeLine{00608\ \ \ \textcolor{keywordflow}{return}\ (n-\/>is\_open[0]\ +\ n-\/>is\_open[1]\ +\ n-\/>is\_open[2]\ +\ n-\/>is\_open[3])\ ==\ 1;}
 \DoxyCodeLine{00609\ \}}
 \DoxyCodeLine{00610\ }
-\DoxyCodeLine{00611\ API\ uint8\_t\ \doxymbox{\hyperlink{infinite__maze_8h_ac8b9f96bc4fcca3f0428dd31d5839b49}{infinite\_maze\_get\_cell}}(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy)\ \{}
+\DoxyCodeLine{00611\ API\ uint8\_t\ infinite\_maze\_get\_cell(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy)\ \{}
 \DoxyCodeLine{00612\ \ \ \textcolor{keywordflow}{return}\ \_get\_cell\_impl(maze\_p,\ wx,\ wy,\ \_is\_dead\_end);}
 \DoxyCodeLine{00613\ \}}
 \DoxyCodeLine{00614\ }
 \DoxyCodeLine{00615\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \_is\_fixed(\textcolor{keyword}{const}\ node\_t*\ n)\ \{\ \textcolor{keywordflow}{return}\ !!n-\/>is\_fixed;\ \}}
 \DoxyCodeLine{00616\ }
-\DoxyCodeLine{00617\ API\ uint8\_t\ \doxymbox{\hyperlink{infinite__maze_8h_a2286ca1218ab4743745f80c48e04d1b8}{infinite\_maze\_get\_fixedness}}(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy)\ \{}
+\DoxyCodeLine{00617\ API\ uint8\_t\ infinite\_maze\_get\_fixedness(\textcolor{keywordtype}{void}*\ maze\_p,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy)\ \{}
 \DoxyCodeLine{00618\ \ \ \textcolor{keywordflow}{return}\ \_get\_cell\_impl(maze\_p,\ wx,\ wy,\ \_is\_fixed);}
 \DoxyCodeLine{00619\ \}}
 \DoxyCodeLine{00620\ }
@@ -520,7 +520,7 @@
 \DoxyCodeLine{00673\ \}}
 \DoxyCodeLine{00674\ }
 \DoxyCodeLine{00675\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ path\_t\ \_get\_path\_to\_root(maze\_t*\ m,\ \textcolor{keywordtype}{int}\ wx,\ \textcolor{keywordtype}{int}\ wy)\ \{}
-\DoxyCodeLine{00676\ \ \ \textcolor{keywordtype}{int}\ cap\ =\ (2\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ +\ 1);}
+\DoxyCodeLine{00676\ \ \ \textcolor{keywordtype}{int}\ cap\ =\ (2\ *\ MAZE\_RADIUS\ +\ 1);}
 \DoxyCodeLine{00677\ \ \ cap\ =\ cap\ *\ cap;}
 \DoxyCodeLine{00678\ }
 \DoxyCodeLine{00679\ \ \ path\_t\ path\ =\ \_path\_create(cap);}
@@ -603,9 +603,9 @@
 \DoxyCodeLine{00756\ }
 \DoxyCodeLine{00757\ \ \ path\_t\ high\ =\ \_hierarchical\_path(acrx,\ acry,\ bcrx,\ bcry,\ maze-\/>outer\_node-\/>outer\_maze);}
 \DoxyCodeLine{00758\ }
-\DoxyCodeLine{00759\ \ \ path\_t\ middle\ =\ \_path\_create((2\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ +\ 1)\ *\ (2\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ +\ 1));}
+\DoxyCodeLine{00759\ \ \ path\_t\ middle\ =\ \_path\_create((2\ *\ MAZE\_RADIUS\ +\ 1)\ *\ (2\ *\ MAZE\_RADIUS\ +\ 1));}
 \DoxyCodeLine{00760\ }
-\DoxyCodeLine{00761\ \ \ \textcolor{keywordtype}{int}\ dim\ =\ 2\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}}\ +\ 1;}
+\DoxyCodeLine{00761\ \ \ \textcolor{keywordtype}{int}\ dim\ =\ 2\ *\ MAZE\_RADIUS\ +\ 1;}
 \DoxyCodeLine{00762\ }
 \DoxyCodeLine{00763\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ high.size;\ ++i)\ \{}
 \DoxyCodeLine{00764\ \ \ \ \ point\_t\ h\ =\ high.data[i];}
@@ -618,8 +618,8 @@
 \DoxyCodeLine{00771\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ dx\ =\ (hp.x\ >\ h.x)\ -\/\ (hp.x\ <\ h.x);}
 \DoxyCodeLine{00772\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ dy\ =\ (hp.y\ >\ h.y)\ -\/\ (hp.y\ <\ h.y);}
 \DoxyCodeLine{00773\ }
-\DoxyCodeLine{00774\ \ \ \ \ \ \ in.x\ +=\ dx\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}};}
-\DoxyCodeLine{00775\ \ \ \ \ \ \ in.y\ +=\ dy\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}};}
+\DoxyCodeLine{00774\ \ \ \ \ \ \ in.x\ +=\ dx\ *\ MAZE\_RADIUS;}
+\DoxyCodeLine{00775\ \ \ \ \ \ \ in.y\ +=\ dy\ *\ MAZE\_RADIUS;}
 \DoxyCodeLine{00776\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
 \DoxyCodeLine{00777\ \ \ \ \ \ \ in.x\ =\ fwx;}
 \DoxyCodeLine{00778\ \ \ \ \ \ \ in.y\ =\ fwy;}
@@ -630,8 +630,8 @@
 \DoxyCodeLine{00783\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ dx\ =\ (hn.x\ >\ h.x)\ -\/\ (hn.x\ <\ h.x);}
 \DoxyCodeLine{00784\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ dy\ =\ (hn.y\ >\ h.y)\ -\/\ (hn.y\ <\ h.y);}
 \DoxyCodeLine{00785\ }
-\DoxyCodeLine{00786\ \ \ \ \ \ \ out.x\ +=\ dx\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}};}
-\DoxyCodeLine{00787\ \ \ \ \ \ \ out.y\ +=\ dy\ *\ \doxymbox{\hyperlink{infinite__maze_8h_ade9c525b6f35e681bc679790d7ccbc71}{MAZE\_RADIUS}};}
+\DoxyCodeLine{00786\ \ \ \ \ \ \ out.x\ +=\ dx\ *\ MAZE\_RADIUS;}
+\DoxyCodeLine{00787\ \ \ \ \ \ \ out.y\ +=\ dy\ *\ MAZE\_RADIUS;}
 \DoxyCodeLine{00788\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
 \DoxyCodeLine{00789\ \ \ \ \ \ \ out.x\ =\ twx;}
 \DoxyCodeLine{00790\ \ \ \ \ \ \ out.y\ =\ twy;}
