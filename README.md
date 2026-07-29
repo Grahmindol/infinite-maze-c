@@ -34,9 +34,13 @@ Performance, memory usage, and edge cases have **not** been the main focus so fa
 - 🔧 Further **optimizations and refactoring are required**
 
 ### Next steps
-- Improve algorithmic efficiency ⚡  
-- Reduce memory footprint 🧠  
-- Add benchmarks and profiling 📊  
+- I found a limitation in the current maze generation algorithm: every generated maze has its main dead end located at the center, because the generation process always starts from the center cell.
+
+This reduces the local variety of generated mazes, as there are effectively fewer than 32 distinct maze patterns available around a given area.
+
+However, this discovery also reveals an opportunity for a major optimization. Since the number of possible local patterns is limited, it will be possible to precompute and store the 32 possible patterns, then refactor the data structure to reuse them efficiently.
+
+A future improvement is planned to make this behavior configurable, allowing users to choose between the current procedural generation approach and the optimized pattern-based generation mode.
 
 Contributions and optimization suggestions are **welcome** 🙌
 
@@ -46,143 +50,10 @@ Contributions and optimization suggestions are **welcome** 🙌
 
 - [Browser Demo](https://grahmindol.github.io/infinite-maze-c/html/demo/index.html)
 
-## Usage 🔧
+## Doxygen page :
+- [Documentation !!](https://grahmindol.github.io/infinite-maze-c/html/infinite__maze_8h.html)
 
-### Doxygen page :
-  [here](https://grahmindol.github.io/infinite-maze-c/html/infinite__maze_8h.html)
-
-### 📚 API
-
-## 🧩 Public API :
-
-- ### infinite_maze_new
-  
-  ```c
-  void* infinite_maze_new(int seed);
-  ```
-  
-  Create a new infinite procedurally generated maze.
-  
-  - Allocates and initializes the root chunk.
-  - Maze generation is **deterministic** with respect to `seed`.
-  - Additional chunks are generated **lazily** on access.
-  
-  **Parameters**
-  - `seed` — Initial random seed controlling maze generation.
-  
-  **Returns**
-  - Opaque pointer to the maze instance.
-  - `NULL` on allocation failure.
-  
-  **Complexity**
-  - **O(1)**
-
-- ### infinite_maze_free
-  
-  ```c
-  void infinite_maze_free(void* m);
-  ```
-  
-  Free an infinite procedurally generated maze.
-  
-  - Recursively frees all generated chunks.
-  - Includes inner and outer mazes.
-  
-  **Parameters**
-  - `m` — Maze instance returned by `infinite_maze_new()`.
-  
-  **Complexity**
-  - **O(log(r))**, where *r* is the distance from the origin to the farthest generated cell.
-  
-  **Warning**
-  - All pointers obtained from this maze become invalid.
-
-- ### infinite_maze_is_walkable
-  
-  ```c
-  bool infinite_maze_is_walkable(void* maze_p, int wx, int wy);
-  ```
-  
-  Test whether a world-space cell is walkable.
-  
-  - Returns whether the cell is an open passage or a wall.
-  - May trigger lazy chunk generation.
-  
-  **Parameters**
-  - `wx` — World X coordinate.
-  - `wy` — World Y coordinate.
-  - `maze_p` — Maze instance.
-  
-  **Returns**
-  - `true` if walkable
-  - `false` otherwise
-  
-  **Complexity**
-  - Average: **O(1)**
-  - Worst case: **O(log(wx² + wy²))**
-
-
-- ### infinite_maze_get_cell
-
-  ```c
-  uint8_t infinite_maze_get_cell(void* maze_p, int wx, int wy);
-  ```
-
-  Retrieve hierarchical dead-end information for a world cell.
-
-  Each bit of the returned byte encodes maze information:
-
-  - Bit 0 : Walkability (1 = walkable, 0 = wall)
-  - Bit 1 : Dead-end at local chunk level
-  - Bits 2–7 : Dead-end status propagated through parent maze levels
-
-  **Parameters**
-  - `wx` — World-space X coordinate.
-  - `wy` — World-space Y coordinate.
-  - `maze_p` — Pointer to the root maze instance.
-
-  **Returns**
-  - Encoded walkability and dead-end hierarchy information
-  - `0` if `maze_p` is NULL
-
-  **Complexity**
-  - **O(log(|wx| + |wy|))**
-
-  **Notes**
-  - May trigger lazy generation of parent maze chunks.
-  - See `infinite_maze_is_walkable`
----
-
-- ###
-  ```c
-  void infinite_maze_walk_from_to(void* maze_p, int fwx, int fwy, int twx, int twy, 
-      void (*walker)(int x, int y, void* user_data), void* user_data);
-  ```
-
-  Stream the unique shortest path between two world coordinates.
-
-  Computes and streams the deterministic shortest path between two
-  world-space coordinates inside the given infinite maze.
-
-  **Parameters**
-  - `maze_p` — Pointer to the root maze instance.
-  - `fwx` Starting world X coordinate.
-  - `fwy` Starting world Y coordinate.
-  - `twx` Target world X coordinate.
-  - `twy` Target world Y coordinate.
-  - `walker` Callback invoked for each world coordinate along the path.
-  - `user_data` User-defined pointer passed unchanged to the callback.
- 
-  **Complexity**
-  - **O(L) = O(exp(d))**
-    where L is the number of world cells along the path.
-    and d is the distance of the farthest point to the origine.
- 
-  **Notes**
-  - The path is streamed in traversal order from start to target.
-  - Concurrent calls must operate on distinct maze instances.
-
-### 🧪 Example
+## 🧪 Example
 
 ```c
 #include <stdio.h>
