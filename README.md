@@ -94,7 +94,7 @@ Contributions and optimization suggestions are **welcome** 🙌
 - ### infinite_maze_is_walkable
   
   ```c
-  bool infinite_maze_is_walkable(int wx, int wy, void* maze_p);
+  bool infinite_maze_is_walkable(void* maze_p, int wx, int wy);
   ```
   
   Test whether a world-space cell is walkable.
@@ -119,7 +119,7 @@ Contributions and optimization suggestions are **welcome** 🙌
 - ### infinite_maze_get_cell
 
   ```c
-  uint8_t infinite_maze_get_cell(int wx, int wy, void* maze_p);
+  uint8_t infinite_maze_get_cell(void* maze_p, int wx, int wy);
   ```
 
   Retrieve hierarchical dead-end information for a world cell.
@@ -140,12 +140,41 @@ Contributions and optimization suggestions are **welcome** 🙌
   - `0` if `maze_p` is NULL
 
   **Complexity**
-  - **O(log(wx² + wy²))**
+  - **O(log(|wx| + |wy|))**
 
   **Notes**
   - May trigger lazy generation of parent maze chunks.
   - See `infinite_maze_is_walkable`
 ---
+
+- ###
+  ```c
+  void infinite_maze_walk_from_to(void* maze_p, int fwx, int fwy, int twx, int twy, 
+      void (*walker)(int x, int y, void* user_data), void* user_data);
+  ```
+
+  Stream the unique shortest path between two world coordinates.
+
+  Computes and streams the deterministic shortest path between two
+  world-space coordinates inside the given infinite maze.
+
+  **Parameters**
+  - `maze_p` — Pointer to the root maze instance.
+  - `fwx` Starting world X coordinate.
+  - `fwy` Starting world Y coordinate.
+  - `twx` Target world X coordinate.
+  - `twy` Target world Y coordinate.
+  - `walker` Callback invoked for each world coordinate along the path.
+  - `user_data` User-defined pointer passed unchanged to the callback.
+ 
+  **Complexity**
+  - **O(L) = O(exp(d))**
+    where L is the number of world cells along the path.
+    and d is the distance of the farthest point to the origine.
+ 
+  **Notes**
+  - The path is streamed in traversal order from start to target.
+  - Concurrent calls must operate on distinct maze instances.
 
 ### 🧪 Example
 

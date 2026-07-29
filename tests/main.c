@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "infinite_maze.h"
+#define INFINITE_MAZE_IMPLEMENTATION
+#include "../infinite_maze.h"
 
 /** ASCII print for testing */
 void infinite_maze_print_ascii(void* root, int W, int H) {
   int minx = -W / 2, miny = -H / 2;
   for (int y = H - 1; y >= 0; y--) {
     for (int x = 0; x < W; x++) {
-      char l = infinite_maze_get_cell(minx + x, miny + y, root);
+      char l = infinite_maze_get_cell(root, minx + x, miny + y);
       putchar(l&1 ? (l&2 ? '*' : ' ') : 219);
       putchar(l&1 ? (l&4 ? '/' : ' ') : 219);
     }
