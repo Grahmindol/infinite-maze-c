@@ -17,7 +17,7 @@ $(LIB): $(HEADER)
 		-o $@
 
 test:
-	gcc -g3 -O0 -Wall -Wextra -fsanitize=address,undefined  -DINFINITE_MAZE_IMPLEMENTATION tests/main.c  -o build/tests && ./build/tests
+	g++ -g3 -O0 -Wall -Wextra -fsanitize=address,undefined tests/main.c  -o build/tests && ./build/tests
 
 wasm:
 	echo '#include "infinite_maze.h"' | emcc -x c \

@@ -1,9 +1,13 @@
 #ifndef INFINITE_MAZE_H
 #define INFINITE_MAZE_H
 
+#ifdef __cplusplus
+#include <cstdint>
+#include <utility>
+#else
 #include <stdbool.h>
 #include <stdint.h>
-
+#endif
 /*
  * Infinite Maze — Single-header C library
  *
@@ -84,7 +88,12 @@
 #define API EMSCRIPTEN_KEEPALIVE
 #elif defined(__GNUC__)
 #define API __attribute__((visibility("default")))
+#else
 #define API
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 /* =======================
    ======= API ===========
@@ -257,7 +266,104 @@ API void infinite_maze_get_region_center(void* maze_p, int wx, int wy, int level
  *          Concurrent calls must operate on distinct maze instances.
  */
 API void infinite_maze_walk_from_to(void* maze_p, int fwx, int fwy, int twx, int twy,
-                            void (*walker)(int x, int y, void* user_data), void* user_data);
+                                    void (*walker)(int x, int y, void* user_data), void* user_data);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+class InfiniteMaze {
+ public:
+  // Create a new infinite procedurally generated maze.
+  // @related infinite_maze_new
+  explicit InfiniteMaze(uint64_t seed) { maze_ = infinite_maze_new(seed); }
+
+  // Free an infinite maze and all generated chunks.
+  // @related infinite_maze_free
+  ~InfiniteMaze() { infinite_maze_free(maze_); }
+
+  // Copy constructor
+  InfiniteMaze(const InfiniteMaze& other) : InfiniteMaze(other.seed()) {}
+  InfiniteMaze& operator=(const InfiniteMaze& other) {
+    if (this != &other) {
+      infinite_maze_free(maze_);
+      maze_ = infinite_maze_new(other.seed());
+    }
+    return *this;
+  }
+  bool operator==(const InfiniteMaze& other) const noexcept { return seed() == other.seed(); }
+  bool operator!=(const InfiniteMaze& other) const noexcept { return !(*this == other); }
+
+  [[nodiscard]]
+  uint64_t seed() const noexcept {
+    return *static_cast<const uint64_t*>(maze_);
+  }
+
+  // Test whether a world-space cell is walkable.
+  // @related infinite_maze_is_walkable
+  [[nodiscard]]
+  bool is_walkable(int wx, int wy) const {
+    return infinite_maze_is_walkable(maze_, wx, wy);
+  }
+
+  // Retrieve hierarchical dead-end information for a world cell.
+  // @related infinite_maze_get_cell
+  [[nodiscard]]
+  uint8_t get_cell(int wx, int wy) const {
+    return infinite_maze_get_cell(maze_, wx, wy);
+  }
+
+  // @related infinite_maze_get_fixedness
+  [[nodiscard]]
+  uint8_t get_fixedness(int wx, int wy) const {
+    return infinite_maze_get_fixedness(maze_, wx, wy);
+  }
+
+  // Compute the hierarchical center of a region.
+  // @related infinite_maze_get_region_center
+  [[nodiscard]]
+  std::pair<int, int> get_region_center(int wx, int wy, int level) const {
+    int cx, cy;
+    infinite_maze_get_region_center(maze_, wx, wy, level, &cx, &cy);
+    return {cx, cy};
+  }
+
+  // Stream the unique shortest path between two world coordinates.
+  // @related infinite_maze_walk_from_to
+  template <typename Walker>
+  void walk_from_to(int from_x, int from_y, int to_x, int to_y, Walker&& walker) {
+    struct Context {
+      Walker* fn;
+    };
+
+    Context ctx{&walker};
+
+    infinite_maze_walk_from_to(
+        maze_, from_x, from_y, to_x, to_y,
+        [](int x, int y, void* user) {
+          auto& fn = *static_cast<Walker*>(static_cast<Context*>(user)->fn);
+          fn(x, y);
+        },
+        &ctx);
+  }
+
+  class _column_proxy {
+   public:
+    _column_proxy(const InfiniteMaze& maze, int x) : maze_(maze), x_(x) {}
+    uint8_t operator[](int y) const { return maze_.get_cell(x_, y); }
+   private:
+    const InfiniteMaze& maze_;
+    int x_;
+  };
+  _column_proxy operator[](int x) const { return _column_proxy(*this, x); }
+
+ private:
+  void* maze_ = nullptr;
+
+};
+
+#endif
 /* =======================
    === IMPLEMENTATION ====
    ======================= */
@@ -266,7 +372,13 @@ API void infinite_maze_walk_from_to(void* maze_p, int fwx, int fwy, int twx, int
 
 #include <stdlib.h>
 
-typedef enum { DIR_N = 0, DIR_W = 1, DIR_E = 2, DIR_S = 3, DIR_COUNT } direction_t;
+typedef enum {
+  DIR_N = 0,
+  DIR_W = 1,
+  DIR_E = 2,
+  DIR_S = 3,
+  DIR_COUNT
+} direction_t;
 
 struct maze_t;
 
@@ -279,7 +391,7 @@ typedef struct node_t {
 } node_t;
 
 typedef struct maze_t {
-  uint64_t seed;
+  uint64_t seed;  // should be first !!!
   node_t* data;
   node_t* outer_node;
 } maze_t;
@@ -321,9 +433,9 @@ static void _explore(maze_t* m, int x, int y) {
   c->outer_maze = m;
 
   rng(&m->seed);
-  direction_t start = m->seed % DIR_COUNT;
-  for (int i = 0; i < DIR_COUNT; i++) {
-    direction_t d = (start + i) % DIR_COUNT;
+  direction_t start = (direction_t)(m->seed % DIR_COUNT);
+  for (int i = 0; i < (int)DIR_COUNT; i++) {
+    direction_t d = (direction_t)((start + i) % DIR_COUNT);
     int nx = x + DIR_DX[d];
     int ny = y + DIR_DY[d];
     node_t* n = _node(m, nx, ny);
@@ -436,10 +548,10 @@ static inline node_t* _get_refined_cell(int wx, int wy, maze_t* root) {
 
 API void* infinite_maze_new(int seed) {
   int size = 2 * MAZE_RADIUS + 1;
-  maze_t* m = calloc(1, sizeof(*m));
+  maze_t* m = (maze_t*)calloc(1, sizeof(*m));
   m->seed = seed;
-  m->data = calloc(size * size, sizeof(node_t));
-  _node(m, 0, 0)->parent_direction = -1;
+  m->data = (node_t*)calloc(size * size, sizeof(node_t));
+  _node(m, 0, 0)->parent_direction = DIR_COUNT;
   _explore(m, 0, 0);
   return (void*)m;
 }
@@ -482,7 +594,8 @@ API bool infinite_maze_is_walkable(void* maze_p, int wx, int wy) {
   return _get_refined_cell(x, y, root)->is_open[!(wx & 1)];
 }
 
-API void infinite_maze_get_region_center(void* maze_p, int wx, int wy, int level, int* cx, int* cy) {
+API void infinite_maze_get_region_center(void* maze_p, int wx, int wy, int level, int* cx,
+                                         int* cy) {
   *cx = wx;
   *cy = wy;
 
@@ -528,7 +641,7 @@ typedef uint8_t (*node_predicate_t)(const node_t*);
 
 static uint8_t _get_cell_impl(void* maze_p, int wx, int wy, node_predicate_t predicate) {
   if (!maze_p) return 0;
-  maze_t* root = maze_p;
+  maze_t* root = (maze_t*)maze_p;
   const int size = 2 * MAZE_RADIUS + 1;
 
   node_t* n = _get_raw_cell(wx >> 1, wy >> 1, root);
@@ -618,9 +731,6 @@ API uint8_t infinite_maze_get_fixedness(void* maze_p, int wx, int wy) {
   return _get_cell_impl(maze_p, wx, wy, _is_fixed);
 }
 
-
-
-
 // Path finding module !
 
 typedef struct point_t {
@@ -635,7 +745,7 @@ typedef struct {
 
 static inline path_t _path_create(int initial_cap) {
   path_t p;
-  p.data = malloc(sizeof(point_t) * initial_cap);
+  p.data = (point_t*)malloc(sizeof(point_t) * initial_cap);
   p.size = 0;
   p.capacity = initial_cap;
   return p;
@@ -650,7 +760,7 @@ static inline void _path_free(path_t* p) {
 static inline void _path_push(path_t* p, point_t pt) {
   if (p->size == p->capacity) {
     p->capacity *= 2;
-    p->data = realloc(p->data, sizeof(point_t) * p->capacity);
+    p->data = (point_t*)realloc(p->data, sizeof(point_t) * p->capacity);
   }
   p->data[p->size++] = pt;
 }
