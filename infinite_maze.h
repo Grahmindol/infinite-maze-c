@@ -348,6 +348,7 @@ class InfiniteMaze {
    public:
     _column_proxy(const InfiniteMaze& maze, int x) : maze_(maze), x_(x) {}
     uint8_t operator[](int y) const { return maze_.get_cell(x_, y); }
+
    private:
     const InfiniteMaze& maze_;
     int x_;
@@ -356,7 +357,6 @@ class InfiniteMaze {
 
  private:
   void* maze_ = nullptr;
-
 };
 
 #endif
@@ -368,13 +368,7 @@ class InfiniteMaze {
 
 #include <stdlib.h>
 
-typedef enum {
-  DIR_N = 0,
-  DIR_W = 1,
-  DIR_E = 2,
-  DIR_S = 3,
-  DIR_COUNT
-} direction_t;
+typedef enum { DIR_N = 0, DIR_W = 1, DIR_E = 2, DIR_S = 3, DIR_COUNT } direction_t;
 
 struct maze_t;
 
@@ -786,7 +780,8 @@ static inline path_t _get_path_to_root(maze_t* m, int wx, int wy) {
 
   int cx = wx, cy = wy;
   while (1) {
-    _path_push(&path, (point_t){cx, cy});
+    point_t pt = {cx, cy};
+    _path_push(&path, pt);
 
     node_t* cell = _get_raw_cell(cx, cy, m);
     if (cell->parent_direction < 0 || cell->parent_direction >= DIR_COUNT) break;

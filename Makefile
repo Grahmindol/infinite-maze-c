@@ -33,7 +33,7 @@ wasm:
 
 #py:
 #	mkdir -p build/py
-#	swig -c++ -python -outdir build/py -o build/py/wrap.cpp infinite_maze.i
+#	swig -c++ -python -outdir build/py -o build/py/infinite_maze_wrap.cpp infinite_maze.i
 #	g++ -DINFINITE_MAZE_IMPLEMENTATION \
 #		build/py/wrap.cpp \
 #		-I/usr/include/python3.14/ \
@@ -42,10 +42,9 @@ wasm:
 #		-o build/py/_infinite_maze.so 
 
 py:
-	rm -r build/py
 	mkdir -p build/py
-	cp infinite_maze.i build/py/infinite_maze.i
 	cp infinite_maze.h build/py/infinite_maze.h
+	swig -c++ -python -outdir build/py -o build/py/infinite_maze_wrap.cpp infinite_maze.i
 	cp README.md build/py/README.md
 	cp template/pyproject.toml build/py/pyproject.toml
 	cp template/setup.py build/py/setup.py
