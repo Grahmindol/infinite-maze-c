@@ -4,6 +4,7 @@
 #ifdef __cplusplus
 #include <cstdint>
 #include <utility>
+#include <vector>
 #else
 #include <stdbool.h>
 #include <stdint.h>
@@ -331,21 +332,16 @@ class InfiniteMaze {
 
   // Stream the unique shortest path between two world coordinates.
   // @related infinite_maze_walk_from_to
-  template <typename Walker>
-  void walk_from_to(int from_x, int from_y, int to_x, int to_y, Walker&& walker) {
-    struct Context {
-      Walker* fn;
-    };
-
-    Context ctx{&walker};
-
+  std::vector<std::pair<int, int>> get_path(int from_x, int from_y, int to_x, int to_y) {
+    std::vector<std::pair<int, int>> path;
     infinite_maze_walk_from_to(
         maze_, from_x, from_y, to_x, to_y,
         [](int x, int y, void* user) {
-          auto& fn = *static_cast<Walker*>(static_cast<Context*>(user)->fn);
-          fn(x, y);
+          auto* path = static_cast<std::vector<std::pair<int, int>>*>(user);
+          path->emplace_back(x, y);
         },
-        &ctx);
+        &path);
+    return path;
   }
 
   class _column_proxy {
@@ -911,8 +907,9 @@ static path_t _hierarchical_path(int fwx, int fwy, int twx, int twy, maze_t* maz
   return middle;
 }
 
-API void infinite_path_walk(void* maze_p, int fwx, int fwy, int twx, int twy,
-                            void (*walker)(int x, int y, void* user_data), void* user_data) {
+API void infinite_maze_walk_from_to(void* maze_p, int fwx, int fwy, int twx, int twy,
+                                    void (*walker)(int x, int y, void* user_data),
+                                    void* user_data) {
   if (!maze_p || !walker) return;
 
   path_t path = _hierarchical_path(fwx >> 1, fwy >> 1, twx >> 1, twy >> 1, (maze_t*)maze_p);
