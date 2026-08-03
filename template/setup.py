@@ -19,4 +19,7 @@ setup(
     license="MIT",
     url="https://github.com/Grahmindol/infinite-maze-c",
     ext_modules=[maze],
+    data_files=[
+        ("include", ["infinite_maze.h"]),
+    ],
 )
